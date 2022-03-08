@@ -1,0 +1,131 @@
+
+
+
+  <nav class="ec-nav sticky-top bg-white nav-bar">
+    <div class="container">
+      <div class="navbar p-0 navbar-expand-lg">
+        <div class="navbar-brand">
+          <a class="logo-default" routerLink="/">
+            <img alt="" style="width: 60px;margin-top: -12px;" src="assets/logo.png" >
+            <strong class="logo-name">Quest</strong> <span class="logo-name"> Way </span>
+          </a>
+            
+            </div>
+ 
+        <div class="collapse navbar-collapse when-collapsed" id="ec-nav__collapsible">
+          <ul class="nav navbar-nav ec-nav__navbar mx-auto">
+            <li class="nav-item nav-item__has-megamenu megamenu-col-2">
+                <a class="nav-link "  routerLink="/">Home</a>
+             
+            </li>
+
+      
+            <li *ngFor="let item of categories" class="nav-item nav-item__has-megamenu megamenu-col-2">
+                <a class="nav-link " [href]="'/programs/' + item.name"  > {{item.name}} </a>
+             
+            </li>
+
+
+      
+
+          <li class="nav-item nav-item__has-megamenu megamenu-col-2">
+            <a class="nav-link "  routerLink="/support">Support</a>
+         
+          </li>
+          <hr class="element-mobile"  style="border-top: 2px solid rgb(179, 179, 179); width: 100%;" >
+          <li *ngIf="!_auth.loggedIn()" style="cursor: pointer;" class="nav-item nav-item__has-megamenu megamenu-col-2 element-mobile">
+            <a class="nav-link " routerLink="/login" >Login</a>
+         
+          </li>
+ 
+          <li *ngIf="!_auth.loggedIn()"  style="cursor: pointer;" class="nav-item nav-item__has-megamenu megamenu-col-2 element-mobile">
+            <a class="nav-link " routerLink="/register">Register</a>
+         
+          </li>
+
+            <li  *ngIf="_auth.loggedIn()"  style="cursor: pointer;" (click)="_auth.logoutUser()" class="nav-item nav-item__has-megamenu megamenu-col-2 element-mobile">
+              <a class="nav-link " >Logout</a>
+       
+            </li>
+          
+          </ul>
+        </div>
+        <div class="nav-toolbar">
+          <ul class="navbar-nav ec-nav__navbar">
+            <li class="nav-item nav-item__has-dropdown">
+              <a class="nav-link dropdown-toggle no-caret" routerLink="/panier" data-toggle="dropdown">
+                <i class="fa fa-shopping-cart position-relative " style="font-size: 20px;">
+
+                  <span *ngIf="panier.panier.panier.length>0" class=" translate-middle badge rounded-pill bg-danger" style="font-size: 9px; position: absolute ;top: -8px;right: -5px;">
+                   {{ panier.panier.panier.length }}
+                   
+                  </span>
+                </i>
+              </a>
+              <ul class="dropdown-menu dropdown-cart" aria-labelledby="navbarDropdown">
+                <li *ngIf="panier.panier.panier.length == 0" class="dropdown-cart__item">
+                  <h2 class="text-center">Cart empty !</h2>
+                </li>
+                <li *ngFor="let item of panier.panier.panier" class="dropdown-cart__item">
+                  <div class="media"><img class="dropdown-cart__img" [src]="endpoint.url + '/getfile/' + item.image" alt="">
+                    <div class="media-body pl-3"><a [routerLink]="['/detail' , item._id]" class="h6">{{item.titre}}</a>
+                      <span class="text-primary ml-2">{{item.newprix ? item.newprix : item.prix}} TND</span></div>
+                  </div><a (click)="panier.supprimerProduitPanier(item)" class="dropdown-cart__item-remove"><i class="fa fa-close"></i></a>
+                </li>
+           
+               
+                <!-- <li class="px-2 py-4 text-center">Subtotal: <span class="text-primary font-weight-semiBold">$275.00</span>
+                </li> -->
+                <li class="px-2 pb-4 text-center">
+                      <button class="btn btn-outline-primary mx-1 mt-2" routerLink="/panier">View Cart</button>
+                      
+              </ul>
+            </li>
+            <li class="nav-item mt-1"><a class="nav-link site-search-toggler" href="#"><i class="fa fa-search"></i></a></li>
+            <li *ngIf="user && _auth.loggedIn() " class="nav-item nav-item__has-megamenu megamenu-col-2 pr">
+              <a class=" profile"  routerLink="/profile">
+                
+              <ng-container *ngIf="user.image.length == 0">  {{user?.nom[0]}} </ng-container> 
+              <img *ngIf="user.image.length > 0" [src]="endpoint.url + '/getfile/' + user.image" alt="" class="pr1">  
+
+              </a>
+           
+            </li>
+
+            <li *ngIf="!_auth.loggedIn()" style="cursor: pointer;" class="nav-item nav-item__has-megamenu megamenu-col-2 element-desk">
+              <a class="nav-link " routerLink="/login" >Login</a>
+           
+            </li>
+   
+            <li *ngIf="!_auth.loggedIn()"  style="cursor: pointer;" class="nav-item nav-item__has-megamenu megamenu-col-2 element-desk">
+              <a class="nav-link " routerLink="/register">Register</a>
+           
+            </li>
+  
+              <li  *ngIf="_auth.loggedIn()"  style="cursor: pointer;" (click)="_auth.logoutUser()" class="nav-item nav-item__has-megamenu megamenu-col-2 element-desk">
+                <a class="nav-link " >Logout</a>
+         
+              </li>
+
+            <span aria-expanded="false" class="navbar-toggler ml-auto collapsed mt-3" data-target="#ec-nav__collapsible" data-toggle="collapse">
+              <div class="hamburger hamburger--spin js-hamburger">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+            </span>
+          </ul>
+        </div>
+      </div>
+    </div><!-- END container-->
+  </nav><!-- END ec-nav -->
+
+  <div class="site-search">
+    <div class="site-search__close bg-black-0_8"></div>
+    <form class="form-site-search" action="#" method="POST">
+      <div class="input-group"><input type="text" placeholder="Search" class="form-control py-3 border-white" required="">
+        <div class="input-group-append"><button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div><!-- END site-search-->

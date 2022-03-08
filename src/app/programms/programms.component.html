@@ -1,0 +1,74 @@
+
+
+<section class="padding-y-60 bg-light-v1">
+<div class="container">
+    <div class="row ml-1">
+        <nav aria-label="breadcrumb" >
+            <ol class="breadcrumb" style="background-color: transparent;">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item"><a [routerLink]="['/courses' , '' , categorie]">Courses</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{categorie}}</li>
+            </ol>
+          </nav>
+    </div>
+</div>
+<div *ngFor="let forma of formationsbycat"  class="container mt-5">
+    <div class="row">
+        <div class="col-12 my-2">
+            <div  class="title_icon">
+                <img [src]="endpoint.url + '/getfile/' + forma.categorie.icon" alt="icon categorie" height="40px">
+                <h1 style="font-weight: bold; color: orangered; font-size: 32px;"> {{forma.categorie.name}} </h1>
+            </div>
+            <p class="text-dark" style="font-size: 1rem;"> {{forma.categorie.description}}  </p>
+        </div>
+         
+    </div>
+    <div class="row">
+        
+        
+        <ng-container *ngIf="forma.formations.length>0" >
+            <div *ngFor="let f of forma.formations" class="col-lg-4 col-md-6 marginTop-30">
+                <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
+                    [src]="endpoint.url + '/getfile/' + f.image" alt=""></a>
+                <div class="p-3"><a  [routerLink]="['/detail' , f._id]" class="h6 title"> {{f.titre}} </a>
+                    <p class="my-2"><i class="ti-user mr-2"></i>  {{ f.formatteur }}  </p>
+                    
+                </div>
+                <div class="media border-top p-3 align-items-center justify-content-between"   >
+                    <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  f.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
+                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" [ngClass]="{'deleted':  f.newprix > 0}" ><span class="text-primary"> {{ f.prix }} TND</span></h4>
+                        <h4 class="h5" style="margin-top: 4px;text-align: left" *ngIf="f.newprix > 0"><span class="text-primary "> {{ f.newprix + ' ( discount )' }} </span></h4>
+                    </ul>
+                    <a  (click)="addToWishList(f._id)"  style="margin-top: -10px;" class="btn btn-opacity-primary iconbox iconbox-sm" data-container="body" data-toggle="tooltip"
+                    data-placement="top" data-skin="light" title="Add to wishlist">
+                    <i *ngIf="_wish.wishlist.indexOf(f._id) == -1 "  class="far fa-heart"></i>
+                    <i *ngIf="_wish.wishlist.indexOf(f._id) >= 0 "  class="fas fa-heart active "></i>
+                </a>
+                </div>
+                </div>
+            </div>
+            
+        </ng-container>
+        
+        
+        <ng-container *ngIf="forma.formations.length==0" >
+
+           
+                <div class="row text-center" style="width: 100%;" >
+
+                    <img src="assets/img/soon.png" alt="" style="width: 150px; height: 150px;" class="ml-auto">
+    
+                    <h2 style="color: #E5E5E5;font-size: 30px;margin-top: 5%;margin-left: 24px;margin-right: auto;">Will be availiable soon!</h2>
+                </div>
+           
+
+        </ng-container>
+   
+      
+    </div><!-- END row-->
+    <div *ngIf="forma.formations.length>2"  class="text-center mt-5"><a [routerLink]="['/courses' , forma.categorie.name , categorie]" class="btn btn-outline-primary btn-icon"><i
+        class="ti-reload mr-2"></i> Load More</a></div>
+</div><!-- END container-->
+
+
+</section>

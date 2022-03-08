@@ -1,0 +1,105 @@
+
+
+.profile{
+
+ 
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.pr{
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 10px;
+    
+}
+
+
+.pr1{
+    width: 40px;
+    height: 40px;
+    margin-top: -10px;
+    border-radius: 50%;   
+}
+
+.nav-bar{
+
+    position: absolute;
+    height: 73px;
+    top: 51px;
+    width: 85%;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.13);
+    border-radius: 12px;
+
+}
+
+
+strong{
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 27px;
+    color: #FA7D1E;
+
+}
+
+span{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 27px;
+    color: #2e2e2e;
+}
+
+
+.nav-link{
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.8);
+
+}
+
+@media only screen and (min-width: 600px){
+   
+    .element-mobile{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    
+    .logo-name{
+        display: none;
+    }
+
+
+    .element-desk{
+        display: none;
+    }
+
+    .nav-bar{
+        top: 24px;
+
+    }
+
+
+}

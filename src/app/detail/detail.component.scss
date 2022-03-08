@@ -1,0 +1,143 @@
+.deleted{
+    color: black;
+    text-decoration: line-through ;
+    font-size: 24px;
+    text-align: right;
+}
+
+
+.less{
+
+    display: block!important;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    
+    margin-bottom: 24px;
+
+}
+
+
+
+.more{
+   
+    text-decoration: underline;
+    background-color: orangered;
+    padding: 10px 25px;
+    border-radius: 25px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: ease 0.3s ;
+  
+}
+.more:hover {
+    background-color: rgb(226, 60, 0);
+}
+
+
+
+
+
+.title_icon {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+.title_icon > h1 {
+    margin: 0 10px !important;
+    text-shadow: 2px 2px 2px rgba(37, 37, 37, 0.158);
+}
+
+
+
+
+
+
+  
+  .title{
+    display: block!important;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    
+  }
+  
+  
+  
+
+  
+  .imgf{
+  
+    object-fit:fill;
+    height: 170px;
+  }
+
+
+  .star {
+    font-size: 1.5rem;
+    color: #b0c4de;
+  }
+  .filled {
+    color: #1e90ff;
+  }
+  .bad {
+    color: #deb0b0;
+  }
+  .filled.bad {
+    color: #ff1e1e;
+  }
+
+
+  .profile{
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-transform: uppercase;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    position: relative;
+  }
+
+.pr{
+    width: 80px;
+    height: 80px;
+    background-color: black;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 10px;
+    
+}
+
+
+.pr1{
+    width: 100px;
+    height: 100px;
+    margin-top: -10px;
+    border-radius: 50%;
+
+ 
+
+    
+}
+
+h3,h5{
+    margin: 0;
+}

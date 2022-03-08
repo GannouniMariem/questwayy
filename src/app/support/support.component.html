@@ -1,0 +1,81 @@
+
+    <div class="container mt-5">
+        <nav aria-label="breadcrumb" >
+            <ol class="breadcrumb" style="background-color: transparent;">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          
+              <li class="breadcrumb-item active" aria-current="page">Support</li>
+            </ol>
+          </nav>
+    </div>
+
+<div class="py-5 shadow-v2 position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mt-4">
+                <div class="media"><span class="iconbox iconbox-md bg-primary text-white"><i
+                            class="ti-mobile"></i></span>
+                    <div class="media-body ml-3">
+                        <h5 class="mb-0">+216 56 590 659</h5>
+                        <p>Call Us </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-4">
+                <div class="media"><span class="iconbox iconbox-md bg-primary text-white"><i
+                            class="ti-email"></i></span>
+                    <div class="media-body ml-3"><a href="mailto:benayedfarah.fsegt@gmail.com"
+                            class="h5">
+                            benayedfarah.fsegt@gmail.com
+                            </a>
+                        <p>Contact Us</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-4">
+                <div class="media"><span class="iconbox iconbox-md bg-primary text-white"><i
+                            class="ti-location-pin"></i></span>
+                    <div class="media-body ml-3">
+                        <h5 class="mb-0">Tunisia</h5>
+                        <p>avenue xxx , xxx ,xxx</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="padding-y-100 bg-light-v2">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2>Send Message</h2>
+                <div class="width-4rem height-4 bg-primary my-2 mx-auto rounded"></div>
+            </div>
+            <div class="col-12 text-center">
+                <div  class="card p-4 p-md-5 shadow-v1">
+                    <p class="lead mt-2">If you want to get in touch with, you can send us an email.. <br> And we will be back to you as soon  as possible.
+                    </p>
+                    <div class="row mt-5 mx-0">
+                        <div class="col-md-4 mb-4"><input [(ngModel)]="contact.name" type="text" class="form-control" placeholder="Name"
+                                required></div>
+                        <div class="col-md-4 mb-4"><input [(ngModel)]="contact.email" type="email" class="form-control" placeholder="Email"
+                                required></div>
+                        <div class="col-md-4 mb-4"><input type="telephone" [(ngModel)]="contact.tel" class="form-control"
+                                placeholder="Phone number"></div>
+                        <div class="col-12"><textarea type="text" [(ngModel)]="contact.message" class="form-control" placeholder="Message"
+                                rows="7"></textarea> 
+                                
+                                
+                            <button (click)="send()" class="btn btn-primary mt-4">Send
+                                Message
+                            
+                                <div *ngIf="loading" class="spinner-border spinner-border-sm" role="status">
+                                    <span class="visually-hidden"></span>
+                                </div>
+                            </button></div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- END row-->
+    </div><!-- END container-->
+</section>

@@ -1,0 +1,20 @@
+.card{
+    margin: 16px;
+}
+
+.deleted{
+    color: black;
+    text-decoration: line-through ;
+    font-size: 14px;
+    text-align: right;
+}
+
+.active{
+  color:rgb(214, 91, 10);
+}
+
+.imgf{
+
+  object-fit:fill;
+  height: 200px;
+}

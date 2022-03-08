@@ -1,0 +1,40 @@
+<section class="padding-y-100 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="card shadow-v2">
+                    <div class="card-header border-bottom">
+                        <h4 class="mt-4 text-center">Reset password</h4>
+                    </div>
+                    <div class="card-body">
+                      
+                       
+                        <div class="px-lg-4">
+                     
+                            <div class="input-group input-group--focus mb-3">
+                                <div class="input-group-prepend"><span
+                                        class="input-group-text bg-white ti-lock"></span></div><input
+                                    type="password" [(ngModel)]="loginUserData.password" [ngClass]="{ 'form-control' : true , 'error' : passwordAlert , 'border-left-0': true , 'pl-0': true}" placeholder="Password">
+                            </div>
+
+                            <div class="input-group input-group--focus mb-3">
+                                <div class="input-group-prepend"><span
+                                        class="input-group-text bg-white ti-lock"></span></div><input
+                                    type="password" [(ngModel)]="loginUserData.confirm" [ngClass]="{ 'form-control' : true , 'error' : passwordAlert , 'border-left-0': true , 'pl-0': true}" placeholder="Confirm Password">
+                            </div>
+   
+                                    
+                                    <button (click)="reset()" class="btn btn-block btn-primary">
+                                        Submit
+                                        <div *ngIf="load" class="spinner-border spinner-border-sm ml-4" role="status">
+                                            <span class="visually-hidden"></span>
+                                        </div>
+                                    </button>
+                    
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- END row-->
+    </div><!-- END container-->
+</section>

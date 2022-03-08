@@ -1,0 +1,178 @@
+<div class="container mt-5">
+    <nav aria-label="breadcrumb" >
+        <ol class="breadcrumb" style="background-color: transparent;">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      
+          <li class="breadcrumb-item active" aria-current="page">profile</li>
+        </ol>
+      </nav>
+</div>
+<section class="paddingTop-50 paddingBottom-100 bg-light">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 mt-4">
+            <div class="card shadow-v1">
+                <div class="card-header text-center border-bottom pt-5 mb-4">
+                   <div *ngIf="user?.image || url?.length>0" class=" mb-4 profile">
+                    <img  class="rounded-circle" style="height: 140px;"  [src]=" url ? url : endpoint?.url + '/getfile/' + user?.image" width="200" height="200" alt="">
+
+                    <label for="upt">
+                        <i (click)="updateTogglePhoto = !updateTogglePhoto" class="fas fa-camera icon"></i>
+                    </label>  
+                   </div>
+                    
+                    <button (click)="updatePhoto()" *ngIf="url" class="btn btn-primary btn-sm my-2"  >Enregistrer 
+                        <div   *ngIf="showSpinnerUpdatePhoto" class="spinner-border  " role="status">
+                            <span class="visually-hidden"></span>
+                          </div>
+                    </button>
+
+                    <div *ngIf="user.image.length==0 && !url" class="rounded-circle mb-4 profile"  >
+                         {{user.nom[0]}} 
+                         <label for="upt">
+                             <i (click)="updateTogglePhoto = !updateTogglePhoto" class="fas fa-camera icon"></i>
+                         </label>   
+                    </div>
+                    
+                    <input #fileInput (change)="onAdd($event)"  style="display: none;" type="file" id="upt">
+                    <h4> {{ user.nom }} </h4>
+                    <p> Student </p>
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item m-2"><i class="ti-shopping-cart text-primary"></i> <span
+                                class="d-block">Courses Order</span> <span class="h6"> {{commandes?.length}} </span></li>
+                        <li class="list-inline-item m-2"><i class="fas fa-heart text-primary"></i> <span
+                                class="d-block">Wishlist</span> <span class="h6"> {{wishlist?.length}} </span></li>
+                    </ul>
+                </div>
+                <div class="card-body border-bottom">
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><span class="d-block">Email address:</span> <a class="h6"
+                                href="mailto:saifullah@gmail.com">{{ user.email }} </a></li>
+                  
+                    </ul>
+                </div>
+  
+            </div>
+        </div><!-- END col-md-4 -->
+        <div class="col-lg-8 mt-4">
+            <div class="card padding-30 shadow-v1">
+                <ul class="nav tab-line tab-line border-bottom mb-4" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Tabs_1-1"
+                            role="tab" aria-selected="true"><i class="fas fa-download mr-1"></i> My orders </a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Tabs_1-2" role="tab"
+                            aria-selected="true"><i class="fas fa-heart mr-1"></i> Wishlist</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Tabs_1-3" role="tab"
+                                aria-selected="true"><i class="fas fa-graduation-cap mr-1"></i> My courses</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Tabs_1-4" role="tab"
+                                    aria-selected="true"><i class="fas fa-user-cog mr-1"></i> Setting</a></li>                
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="Tabs_1-1" role="tabpanel">
+                        <div class="table-responsive my-4">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Order ID</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let cmd of commandes; let i = index">
+                                        <th scope="row" class="text-dark font-weight-semiBold">{{ i }}</th>
+                                        <td style="display: flex;">
+                                            <img  *ngFor="let img of cmd.formations" style="width: 40px; height: 40px; margin-left: -12px ;  border-radius: 50%; object-fit: cover;border: 3px solid white;" [src]="endpoint.url + '/getfile/' + img.image" alt="">
+                                        </td>
+                                        
+                                        <td> {{ cmd.date | date }} </td>
+                                        <td *ngIf="cmd.prix>0"> {{ cmd.prix }} TND </td>
+                                        <td *ngIf="cmd.prix==0"> FREE </td>
+                                        
+                                    </tr>
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- END tab-pane -->
+                    <div class="tab-pane fade" id="Tabs_1-2" role="tabpanel">
+                        <div class="row">
+                            <div *ngFor="let f of wishlist" class="col-lg-4 col-md-6 marginTop-30">
+                                <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
+                                    [src]="endpoint.url + '/getfile/' + f.image" alt=""></a>
+                                <div class="p-3"><a  [routerLink]="['/detail', f.titre , f._id]" class="h6 title"> {{f.titre}} </a>
+                                    
+                                </div>
+                                <div class="media border-top p-3 align-items-center justify-content-between"   >
+                                    <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  f.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
+                                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="f.prix == 0"  ><span class="text-primary"> FREE</span></h4>
+
+                                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="f.prix > 0" [ngClass]="{'deleted':  f.newprix > 0}" ><span class="text-primary"> {{ f.prix }} TND</span></h4>
+                                        <h4 class="h5" style="margin-top: 4px;text-align: left" *ngIf="f.newprix > 0"><span class="text-primary "> {{ f.newprix + ' ( special offer  )' }} </span></h4>
+                                     </ul>
+                                    <a  (click)="addToWishList(f._id)"  style="margin-top: -10px;" class="btn btn-opacity-primary iconbox iconbox-sm" data-container="body" data-toggle="tooltip"
+                                    data-placement="top" data-skin="light" title="Add to wishlist">
+                                    <i *ngIf="_wish.wishlist.indexOf(f._id) == -1 "  class="far fa-heart"></i>
+                                    <i *ngIf="_wish.wishlist.indexOf(f._id) >= 0 "  class="fas fa-heart active "></i>
+                                </a>
+                                </div>
+                                </div>
+                            </div>
+                    
+                        </div><!-- END row-->
+                    </div><!-- END tab-pane -->
+                    <div class="tab-pane fade" id="Tabs_1-3" role="tabpanel">
+                        <div class="row">
+                            <div *ngFor="let f of formations" class="col-lg-4 col-md-6 marginTop-30">
+                                <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
+                                    [src]="endpoint.url + '/getfile/' + f.image" alt=""></a>
+                                <div class="p-3"><a  [routerLink]="['/detail', f.titre , f._id]" class="h6 title"> {{f.titre}} </a>
+                                    
+                                </div>
+                                <div class="media border-top p-3 align-items-center justify-content-between"   >
+                                    <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  f.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
+                                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="f.prix == 0"  ><span class="text-primary"> FREE</span></h4>
+
+                                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="f.prix > 0" [ngClass]="{'deleted':  f.newprix > 0}" ><span class="text-primary"> {{ f.prix }} TND</span></h4>
+                                        <h4 class="h5" style="margin-top: 4px;text-align: left" *ngIf="f.newprix > 0"><span class="text-primary "> {{ f.newprix + ' ( special offer  )' }} </span></h4>
+                                    </ul>
+                                    <a  (click)="addToWishList(f._id)"  style="margin-top: -10px;" class="btn btn-opacity-primary iconbox iconbox-sm" data-container="body" data-toggle="tooltip"
+                                    data-placement="top" data-skin="light" title="Add to wishlist">
+                                    <i *ngIf="_wish.wishlist.indexOf(f._id) == -1 "  class="far fa-heart"></i>
+                                    <i *ngIf="_wish.wishlist.indexOf(f._id) >= 0 "  class="fas fa-heart active "></i>
+                                </a>
+                                </div>
+                                </div>
+                            </div>
+                    
+                        </div><!-- END row-->
+                    </div><!-- END tab-pane -->
+
+
+                    <div class="tab-pane fade" id="Tabs_1-4" role="tabpanel">
+                        <div class="row">
+                       
+                            <label for="name">Name:</label>
+                            <input  [(ngModel)]="user.nom"  type="text" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testName}">
+                    
+                            <label for="name">E-mail:</label>
+                            <input  [(ngModel)]="user.email"   type="text" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testEmail}">
+                    
+                            <label for="name">New Password:</label>
+                            <input  [(ngModel)]="user.password"  type="text" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testPassword}">
+                            
+                            <label for="name">Confirme password:</label>
+                            <input  [(ngModel)]="confirmePassword"  type="text" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testConfirme}">
+                    
+
+                            <button (click)="updateUser()" class="btn btn-primary mt-2"> Save changes </button>
+                        </div><!-- END row-->
+                    </div><!-- END tab-pane -->
+                </div><!-- END tab-content-->
+            </div><!-- END card-->
+        </div><!-- END col-md-8 -->
+    </div>
+    <!--END row-->
+</div>
+<!--END container-->
+</section>

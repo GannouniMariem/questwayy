@@ -1,0 +1,120 @@
+<div class="padding-y-60 bg-cover" data-dark-overlay="6"
+style="background: url(assets/img/breadcrumb-bg.jpg) no-repeat">
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-6 my-2 text-white">
+            <ol class="breadcrumb breadcrumb-double-angle bg-transparent p-0">
+                <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                
+                <li class="breadcrumb-item">All Courses</li>
+            </ol>
+            <h2 class="h1">All Courses</h2>
+            <p class="lead"><span class="text-primary"> {{formations?.length}} </span> courses found</p>
+        </div>
+        <form class="col-lg-5 my-2 ml-auto">
+            <div class="input-group bg-white rounded p-1"><input  (input)="filterItem($event.target.value)" type="text" class="form-control border-white"
+                    placeholder="What do you want to learn?" required="">
+              
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<section class="py-3 position-relative shadow-v1">
+<div class="container">
+    <form class="row">
+        <div class="col-md-6 my-2">
+            <ul class="list-inline">
+                <li class="list-inline-item my-2">
+                    <select class="form-control"  (change)="filterItemByCategorie($event.target.value)" >
+                        <option selected="selected">Select Category</option>
+                        <option *ngFor="let item of categories"  > {{ item.name }} </option>
+                       
+                    </select></li>
+                <li class="list-inline-item my-2">
+                    <select class="form-control"  (change)="filterItemBySubCategorie($event.target.value)">
+                        <option selected="selected">Select Sub categorie</option>
+                        <option *ngFor="let item of subcategorie" (click)="filterItemBySubCategorie(item.name)" > {{item.name}} </option>
+                       
+                    </select></li>
+            </ul>
+        </div>
+        <div class="col-md-6 my-2 text-md-right">
+            <div class="d-inline-flex justify-md-content-end">
+      
+                <div class="d-flex rounded border ml-3 px-2 my-2"><a (click)="display = false"
+                        class="active btn px-1">
+                        <i class="ti-layout-grid2"></i>
+                    </a><a (click)="display = true" class="btn px-1">
+                        <i class="ti-view-list"></i>
+                    </a></div>
+            </div>
+        </div>
+    </form><!-- END row-->
+</div><!-- END container-->
+</section>
+<section *ngIf="display" class="padding-y-60 bg-light-v2">
+<div class="container">
+    <div class="row">
+          <div *ngFor="let f of formations" class="col-lg-4 col-md-6 marginTop-30">
+                <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
+                    [src]="endpoint.url + '/getfile/' + f.image" alt=""></a>
+                <div class="p-3"><a  routerLink="/detail" class="h6 title"> {{f.titre}} </a>
+                    <p class="my-2"><i class="ti-user mr-2"></i>  {{ f.formatteur }}  </p>
+                    
+                </div>
+                <div class="media border-top p-3 align-items-center justify-content-between"   >
+                    <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  f.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
+                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" [ngClass]="{'deleted':  f.newprix > 0}" ><span class="text-primary"> {{ f.prix }} TND</span></h4>
+                        <h4 class="h5" style="margin-top: 4px;text-align: left" *ngIf="f.newprix > 0"><span class="text-primary "> {{ f.newprix + ' ( discount )' }} </span></h4>
+                    </ul>
+                    <a  (click)="addToWishList(f._id)"  style="margin-top: -10px;" class="btn btn-opacity-primary iconbox iconbox-sm" data-container="body" data-toggle="tooltip"
+                    data-placement="top" data-skin="light" title="Add to wishlist">
+                    <i *ngIf="_wish.wishlist.indexOf(f._id) == -1 "  class="far fa-heart"></i>
+                    <i *ngIf="_wish.wishlist.indexOf(f._id) >= 0 "  class="fas fa-heart active "></i>
+                </a>
+                </div>
+                </div>
+            </div>
+
+    </div><!-- END row-->
+</div><!-- END container-->
+</section>
+
+
+
+<section *ngIf="!display"  class="paddingTop-50 paddingBottom-100 bg-light-v2">
+    <div class="container">
+        <div  *ngFor="let item of formations"  class="list-card align-items-center shadow-v1 marginTop-30">
+            <div class="col-lg-4 px-lg-4 my-4"><img class="w-100 imgf" [src]="endpoint.url + '/getfile/' + item.image" alt=""></div>
+            <div class="col-lg-8 paddingRight-30 my-4">
+                <div class="media justify-content-between">
+                    <div class="group"><a [routerLink]="['/detail' , item._id]" class="h4"> {{item.titre}} </a>
+                        <ul class="list-inline mt-3">
+                       
+                            <li class="list-inline-item mr-2"><i class="fas fa-star text-warning"></i> <i
+                                    class="fas fa-star text-warning"></i> <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i> <i class="fas fa-star text-warning"></i>
+                                <span class="text-dark">5</span> <span>(4578)</span></li>
+                        </ul>
+                    </div>  <a  (click)="addToWishList(item._id)"  style="margin-top: -10px;" class="btn btn-opacity-primary iconbox iconbox-sm" data-container="body" data-toggle="tooltip"
+                    data-placement="top" data-skin="light" title="Add to wishlist">
+                    <i *ngIf="_wish.wishlist.indexOf(item._id) == -1 "  class="far fa-heart"></i>
+                    <i *ngIf="_wish.wishlist.indexOf(item._id) >= 0 "  class="fas fa-heart active "></i>
+                </a>
+
+                </div>
+        
+                <div class="d-md-flex justify-content-between align-items-center">
+                    <ul class="list-inline mb-md-0">
+                        <li class="list-inline-item mr-3"><span class="h4 d-inline text-primary"> TND {{ item.newprix > 0 ? item.newprix : item.prix }} </span> <span
+                                class="h6 d-inline small text-gray"><s> {{ item.newprix > 0 ? item.prix : '' }}</s></span></li>
+                        <li class="list-inline-item mr-3"><i class="ti-headphone small mr-2"></i> {{item.lectures}} lectures</li>
+                        <li class="list-inline-item mr-3"><i class="ti-time small mr-2"></i> {{item.heures}} hours</li>
+                    </ul><span class="badge badge-success" *ngIf="item.featured">featured</span>
+                </div>
+            </div>
+        </div>
+   
+    </div><!-- END container-->
+</section>
