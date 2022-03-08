@@ -31,7 +31,7 @@ export class ForgotComponent implements OnInit {
       res=>{
   
         this.response = res;
-        console.log(res);
+  
         
        if(this.response.etat === 'invalid'){
         this.emailAlert = true;
@@ -44,7 +44,10 @@ export class ForgotComponent implements OnInit {
       },
       err=>{
 
-        
+        this.emailAlert = true;
+        setTimeout(() => {
+          this.emailAlert = false;
+        }, 3000);
         
       }
 
