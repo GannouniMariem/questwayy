@@ -6,6 +6,10 @@ import { FormationService } from '../services/formation.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../services/auth.service';
+
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
+
 @Component({
   selector: 'app-programms',
   templateUrl: './programms.component.html',
@@ -13,6 +17,34 @@ import { AuthService } from '../services/auth.service';
 })
 export class ProgrammsComponent implements OnInit {
 
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 1700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 2
+      },
+      940: {
+        items: 3
+      }
+    },
+    nav: true
+  }
+
+
+
+  
   constructor(
 
     private route: ActivatedRoute,
