@@ -1,0 +1,39 @@
+.deleted{
+    color: black;
+    text-decoration: line-through ;
+    font-size: 14px;
+    text-align: right;
+}
+
+
+.list-unstyled{
+    height: 30px;
+}
+
+
+.title{
+  display: block!important;
+  display: -webkit-box!important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  height: 45px;
+}
+
+
+
+.top{
+
+  margin-top: -30px !important;
+
+}
+
+
+
+.imgf{
+
+  object-fit:fill;
+  height: 230px;
+}

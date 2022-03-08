@@ -1,1 +1,39 @@
-<p>result works!</p>
+<section  class="padding-y-60 bg-light-v2" style="padding-top: 160px !important;">
+    <div  class="container">
+        <h3 >{{formations.length}} Resultats de recherches</h3>
+        <div  class="row"><!---->
+        </div>
+        <div *ngIf="formations.length == 0 "  class="row text-center" style="width: 100%; height: 30vh;">
+            <img  src="assets/img/soon.png" alt="" class="ml-auto align" style="width: 150px; height: 150px;">
+            <h2  style="color: #E5E5E5; font-size: 30px; margin-top: 5%; margin-left: 24px; margin-right: auto;">
+                Will be availiable soon!
+            </h2>
+        </div><!----><!---->
+
+
+        <div class="row">
+            <div *ngFor="let f of formations" class="col-lg-4 col-md-6 marginTop-30">
+                <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
+                    [src]="path.url + '/getfile/' + f.image" alt=""></a>
+                <div class="p-3"><a  [routerLink]="['/detail', f.titre , f._id]" class="h6 title"> {{f.titre}} </a>
+                    
+                </div>
+                <div class="media border-top p-3 align-items-center justify-content-between"   >
+                    <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  f?.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
+                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="f?.prix == 0"  ><span class="text-primary"> FREE</span></h4>
+
+                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="f.prix > 0" [ngClass]="{'deleted':  f.newprix > 0}" ><span class="text-primary"> {{ f.prix }} TND</span></h4>
+                        <h4 class="h5" style="margin-top: 4px;text-align: left" *ngIf="f.newprix > 0"><span class="text-primary "> {{ f.newprix + ' ( special offer  )' }} </span></h4>
+                     </ul>
+                    <a  (click)="addToWishList(f._id)"  style="margin-top: -10px;" class="btn btn-opacity-primary iconbox iconbox-sm" data-container="body" data-toggle="tooltip"
+                    data-placement="top" data-skin="light" title="Add to wishlist">
+                    <i *ngIf="_wish.wishlist.indexOf(f._id) == -1 "  class="far fa-heart"></i>
+                    <i *ngIf="_wish.wishlist.indexOf(f._id) >= 0 "  class="fas fa-heart active "></i>
+                </a>
+                </div>
+                </div>
+            </div>
+    
+        </div><!-- END row-->
+    </div>
+</section>

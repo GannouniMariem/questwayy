@@ -57,6 +57,12 @@ export class FormationService {
   }
 
 
+  recherche(key: any){
+
+    return this.http.get<any>(this.urlformation +"recherche/" + key);
+
+  }
+
   getformationbysouscategorie(cat: any){
 
     return this.http.get<any>(this.urlformation +"getformationbysouscategorie/" + cat);

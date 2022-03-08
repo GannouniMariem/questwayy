@@ -5,11 +5,13 @@ import { BlogComponent } from './blog/blog.component';
 import { DetailComponent } from './detail/detail.component';
 import { DetailarticleComponent } from './detailarticle/detailarticle.component';
 import { ForgotComponent } from './forgot/forgot.component';
+import { InstructorComponent } from './instructor/instructor.component';
 import { LoginComponent } from './login/login.component';
 import { PanierComponent } from './panier/panier.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { ResetComponent } from './reset/reset.component';
+import { ResultComponent } from './result/result.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) }, 
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'detail/:titre/:id' , component: DetailComponent },
   // { path: 'article/:id', component: DetailarticleComponent  } ,
   { path: 'profile' , component: ProfileComponent },
+  { path: 'instructor/:name/:id' , component: InstructorComponent },
+
   { path: 'panier' , component: PanierComponent },
   // { path: 'blogs' , component: BlogComponent},
   // { path: 'courses/:cat/:sub' , component: AllcoursesComponent },
@@ -27,6 +31,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgotpassword' , component: ForgotComponent},
   { path: 'resetpassworduser/:id/:token'  , component: ResetComponent},
+
+  { path: 'result/:key'  , component: ResultComponent},
+
 
 
 ];

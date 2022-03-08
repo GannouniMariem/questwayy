@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategorieService } from '../services/categorie.service';
 import { EndpointService } from '../services/endpoint.service';
 import { FormationService } from '../services/formation.service';
@@ -28,7 +28,8 @@ export class DetailComponent implements OnInit {
     private panier: PanierService,
     private _wish: WishlistService,
     private _auth: AuthService,
-    private _review: ReviewService
+    private _review: ReviewService,
+    private router : Router
      ) { }
 
 
@@ -39,7 +40,7 @@ export class DetailComponent implements OnInit {
      response: any; 
      formatteur: any; 
      readmore = true;
-     recomended :any;
+   
      user: any;
      reviews:any;
      reviewsType = [1,2,3,4,5];
@@ -111,14 +112,7 @@ export class DetailComponent implements OnInit {
 
 
 
-        this._formation.getrecomendedformationbycategorie(this.formation.categorie).subscribe(
-          res=>{
-            this.recomended = res;
-            this.recomended.splice(this.recomended.indexOf(this.formation), 1);
-            console.log('recomended' , res);
-            
-          }
-        );
+  
         
       }
     );
@@ -136,10 +130,23 @@ export class DetailComponent implements OnInit {
 
 
   addToCart(){
-
-
+    this.panier.ajoutProduitAuPanier(this.formation);
+    Swal.fire({
+      title: 'Added ?',
+      text: "You won't to !",
+      icon: 'success',
+      showCancelButton: true,
+      cancelButtonText: 'find more courses',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'go to cart'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/panier']);
+      }
+    })
     
-      this.panier.ajoutProduitAuPanier(this.formation);
+      
 
 
   }

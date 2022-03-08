@@ -2,15 +2,15 @@
 
 
 
-<section class="paddingBottom-100 ">
+<section *ngIf="formation" class="paddingBottom-100 mt-5 " style="margin-top: 100px !important">
 <div class="container">
     <div class="row">
         
-    <div class="col-lg-10 mt-5 text-secondary  mx-auto">
+    <div class="col-lg-10 mt-5 text-secondary">
         <nav aria-label="breadcrumb" >
             <ol class="breadcrumb" style="background-color: transparent;">
               <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-              <li class="breadcrumb-item"><a [routerLink]="['/courses' , '' , '']">Courses</a></li>
+              <li class="breadcrumb-item"><a >Courses</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{formation?.titre}}</li>
             </ol>
           </nav>
@@ -19,8 +19,22 @@
     </div>
     <div class="row">
         <div class="col-lg-10 mx-auto marginTop-30">
-            <li style="float: right;" class="list-inline-item mr-3"><span class="h4 d-inline text-primary"> TND {{ formation?.newprix > 0 ? formation?.newprix : formation?.prix }} </span> <span
-                class="h6 d-inline small text-gray"><s> {{ formation?.newprix > 0 ? formation?.prix : '' }}</s></span></li>
+            <li *ngIf="formation.prix > 0" style="float: right;" class="list-inline-item mr-3">
+                <span class="h4 d-inline text-primary">
+                     TND {{ formation?.newprix > 0 ? formation?.newprix : formation?.prix }} 
+                </span> 
+                <span class="h6 d-inline small text-gray"> 
+                    {{ formation?.newprix > 0 ? formation?.prix : '' }}
+                </span>
+            
+            </li>
+            <li *ngIf="formation.prix == 0" style="float: right;" class="list-inline-item mr-3">
+                <span class="h4 d-inline text-primary">
+                     FREE 
+                </span> 
+             
+            
+            </li>
             <h1> {{formation?.titre}} </h1>
 
            
@@ -28,8 +42,8 @@
                 <div class="col-lg-3 col-md-6 my-2">
                     <div class="media border-right height-100p"><img class="iconbox mr-3"
                             [src]="endpoint.url + '/getfile/' + formatteur?.photo" alt="">
-                        <div class="media-body"><span class="text-gray d-block">Instructor:</span> <a href="#"
-                                class="h6"> {{ formatteur?.name + ' ' + formatteur?.lastname }} </a></div>
+                        <div class="media-body"><span class="text-gray d-block" >Instructor:</span> <a href="#"
+                                class="h6" [routerLink]="['/instructor' , formatteur?.name + ' ' + formatteur?.lastname , formatteur?.name + ' ' + formatteur?._id]"> {{ formatteur?.name + ' ' + formatteur?.lastname }} </a></div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 my-2">
@@ -50,7 +64,15 @@
                     <div class="text-md-right height-100p">
                      
                       
-                        <a *ngIf="!isMine" class="btn btn-primary" (click)="addToCart()" >Enroll now</a>
+                        <a *ngIf="!isMine && formation.prix != 0" class="btn btn-primary" (click)="addToCart()" > 
+                            <i  class="fa fa-shopping-cart mr-1" aria-hidden="true"></i>
+                            Buy this course
+                        </a>
+
+                        <a *ngIf="!isMine && formation.prix == 0 && formation.link.length > 0" class="btn btn-primary" (click)="addToCart()" > 
+                            <i  class="fa fa-shopping-cart mr-1" aria-hidden="true"></i>
+                            Enroll for free
+                        </a>
                     </div>
                 </div>
             </div><!-- END row-->
@@ -60,7 +82,7 @@
                
                 
                
-                 <video *ngIf="formation?.trailer.length < 20" class="w-100" [src]="endpoint.url + '/getfile/' + formation?.trailer" controls></video>
+                 <video *ngIf="formation?.trailer.length > 0 && formation?.trailer.length < 20" class="w-100" [src]="endpoint.url + '/getfile/' + formation?.trailer" controls></video>
                 
                 <img *ngIf="!formation?.trailer" class="w-100" [src]="endpoint.url + '/getfile/' + formation?.image" alt="">
             </div>
@@ -123,11 +145,11 @@
                        
                         </div>
                        
-                        <div class="text-center mt-5"><a (click)="readmore = !readmore" class="btn btn-primary btn-icon"><i
+                        <div class="text-center mt-5" *ngIf="formation.description.length > 1000"><a (click)="readmore = !readmore" class="btn btn-primary btn-icon"><i
                                                 class="ti-reload mr-2"></i> {{ !readmore ? 'Show less': 'Show more' }}</a></div>
 
 
-                        <h4 class="my-4 ">Students Feedback</h4>
+                        <h4 class="my-5 ">Students Feedback</h4>
 
                         <div *ngIf="isMine" class="row border-bottom mx-0 py-4 mt-4 shadow-v3 align-items-center">
                             <div class="col-md-4 my-2 media">
@@ -261,7 +283,7 @@
                             </div>
                         </div><!-- END row-->
                     </ng-container>
-                        <div class="text-center mt-5" *ngIf="reviews.length > maxReview"><a (click)="maxReview = maxReview + 3" class="btn btn-primary btn-icon"><i
+                        <div class="text-center mt-5" *ngIf="reviews?.length > maxReview"><a (click)="maxReview = maxReview + 3" class="btn btn-primary btn-icon"><i
                                     class="ti-reload mr-2"></i> Load More</a></div>
                     </div><!-- END tab-pane-->
               
@@ -299,43 +321,3 @@
     </div><!-- END row-->
 </div><!-- END container-->
 </section>
-<section class="padding-y-100 bg-light">
-<div class="container">
-    <div class="row">
-        <div class="col-12 mb-4">
-            <h2>You May Like</h2>
-            <div class="width-5rem bg-primary height-4 rounded"></div>
-        </div>
-        <div class="col-12 mt-4">
-       
-
-            <div class="row">
-                <div *ngFor="let f of recomended" class="col-lg-4 col-md-6 marginTop-30">
-                    <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
-                        [src]="endpoint.url + '/getfile/' + f?.image" alt=""></a>
-                    <div class="p-3"><a [href]="'/detail/' + f?._id"   class="h6 title"> {{f?.titre}} </a>
-                        <p class="my-2"><i class="ti-user mr-2"></i>  {{ f?.formatteur }}  </p>
-                        
-                    </div>
-                    <div class="media border-top p-3 align-items-center justify-content-between"   >
-                        <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  f?.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
-                            <h4 class="h5" style=" margin-bottom: -8px;text-align: left" [ngClass]="{'deleted':  f?.newprix > 0}" ><span class="text-primary"> {{ f?.prix }} TND</span></h4>
-                            <h4 class="h5" style="margin-top: 4px;text-align: left" *ngIf="f?.newprix > 0"><span class="text-primary "> {{ f?.newprix + ' ( discount )' }} </span></h4>
-                        </ul>
-                        <a  (click)="addToWishList(f?._id)"  style="margin-top: -10px;" class="btn btn-opacity-primary iconbox iconbox-sm" data-container="body" data-toggle="tooltip"
-                        data-placement="top" data-skin="light" title="Add to wishlist">
-                        <i *ngIf="_wish.wishlist.indexOf(f?._id) == -1 "  class="far fa-heart"></i>
-                        <i *ngIf="_wish.wishlist.indexOf(f?._id) >= 0 "  class="fas fa-heart active "></i>
-                    </a>
-                    </div>
-                    </div>
-                </div>
-                
-            </div>
-
-
-
-        </div>
-    </div><!-- END row-->
-</div><!-- END container-->
-</section><!-- END section-->

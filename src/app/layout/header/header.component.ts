@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
   commandes: any;
   formations = [];
 wishlist : any;
+    key= '';
   ngOnInit(): void {
 
         
@@ -53,9 +54,6 @@ wishlist : any;
           this._wish.getwishlist().subscribe(
             res=>{
               this.wishlist = res;
-          
-              
-              
             }
           );
          }
