@@ -54,13 +54,15 @@ export class ProgrammsComponent implements OnInit {
     private _wish: WishlistService,
     private _auth: AuthService
 
-  ) { }
+  ) {
+    this.screenWidth = window.innerWidth;
+   }
 
   @HostListener('window:resize', ['$event'])
     onResize(event?) {
       
       this.screenWidth = window.innerWidth;
-      console.log(this.screenWidth);
+  
       
       
     }

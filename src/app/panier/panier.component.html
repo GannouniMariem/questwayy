@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <ol class="breadcrumb justify-content-md-end bg-transparent">
                     <li class="breadcrumb-item"><a style="color: rgb(0, 0, 0);" routerLink="/">Home</a></li>
-                    
+
                     <li class="breadcrumb-item" style="color: rgb(0, 0, 0);">Cart</li>
                 </ol>
             </div>
@@ -24,23 +24,23 @@
                             <tr>
                                 <th scope="col" style="width: 60%;">Product Name</th>
                                 <th scope="col" style="width: 20%;">Price</th>
-                              
+
                                 <th scope="col" style="width: 20%;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            
+
 
                             <tr *ngFor="let item of panier.panier.panier">
                                 <td class="p-4"><span class="d-inline-block width-7rem border p-3 mr-3"><img
                                     [src]="endpoint.url + '/getfile/' + item.image" alt=""> </span><a
-                                    [routerLink]="['/detail' , item._id]"> {{ item.titre }}</a></td>
-                            
+                                    [routerLink]="['/detail', item.titre , item._id]"> {{ item.titre }}</a></td>
+
                                 <td> {{item.newprix  ? item.newprix : item.prix}} TND </td>
                                 <td class="text-center"><a (click)="panier.supprimerProduitPanier(item)"  ><i class="ti-close"></i></a></td>
                             </tr>
-                     
+
                             <tr>
                                 <td colspan="2" class="p-4">
                                     <!-- <form class="form-inline"><input type="text" class="form-control"
@@ -48,25 +48,39 @@
                                             class="btn btn-primary ml-2">Submit</button></form> -->
                                 </td>
                                 <td colspan="3">Total: <span
-                                        class="font-weight-semiBold font-size-18">{{ calculTotal() }} TND</span></td>
+                                        class="font-weight-semiBold font-size-18">{{ totalPrice | number : '1.2-2' }} TND</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div><!-- END col-12 -->
+            <ng-container *ngIf="panier.panier.panier.length > 0" >
+            <div class="row  w-100 mt-5">
+              <h2 class="ml-auto col-7">Do you have any coupon ?</h2>
+            </div>
+            <div  class="col-md-12 mt-4 text-right row" style="display: flex;justify-content: end;">
+              <div class="col-lg-4">
+                <input type="text" [(ngModel)]="code.code"  [ngClass]="{'form-control': true, 'mt-2':true ,'error' : testCode}"    placeholder="Coupon" required>
+                <p class="text-danger text-left"> {{ testCodeResponse?.message != 'success' ? testCodeResponse?.message : null }} </p>
+              </div >
 
-            <div *ngIf="!step1" class="col-md-12 mt-4 text-right">
-                 <button (click)="procced()"  class="btn btn-primary ml-3">Checkout</button>
+
+              <button  (click)="validate()" class="btn btn-primary form-control col-2 ml-4 mt-2" style="height: 46px;">{{ testApplyed ? 'Applyed' : 'Apply'}}</button>
             </div>
 
-            <div *ngIf="step1" class="form-inline mt-5 col-6  ml-auto">
-                    <input type="text" [(ngModel)]="commande.adress"  [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testAdress}"   placeholder="address" required>   
-                    <input type="text" [(ngModel)]="commande.tel" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testTel}" placeholder="phone" required>   
-                    <input type="text" [(ngModel)]="commande.poste" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testPoste}" placeholder="zip code" required>   
-                    
-                    <button  (click)="checkout()" class="btn btn-primary ml-auto mt-3">Valider paiement</button> 
+            <div class="row  w-100 mt-5">
+              <h2 class="ml-auto col-7">Checkout</h2>
             </div>
-     
+            <div class="form-inline mt-5 col-6  ml-auto">
+                    <input type="text" [(ngModel)]="commande.adress"  [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testAdress}"   placeholder="address ( Example : Tunis )" required>
+                    <input type="text" [(ngModel)]="commande.tel" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testTel}" placeholder="phone ( Example: +216 98 ... )" required>
+                    <input type="text" [(ngModel)]="commande.poste" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testPoste}" placeholder="code postal ( Example: 2028 )" required>
+
+                    <button  (click)="checkout()" class="btn btn-primary ml-auto mt-3">Proceed to checkout</button>
+            </div>
+
+
+          </ng-container>
 
 
             <!-- END col-md-6 -->

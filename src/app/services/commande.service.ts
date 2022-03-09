@@ -11,7 +11,9 @@ export class CommandeService {
 
   url = this.endpoint.url + '/commande/';
 
-    
+  getCommandeById(id: any){
+    return this.http.get(this.url + 'getcommandebyid/' + id);
+  }    
 
 
   passer(cmd:any){
@@ -19,6 +21,13 @@ export class CommandeService {
     return this.http.post( this.url  + 'addcommande', cmd );
 
   }
+
+  passerFree(cmd:any){
+
+    return this.http.post( this.url  + 'addfreecommande', cmd );
+
+  }
+
 
   getMyCommande(id:any){
 

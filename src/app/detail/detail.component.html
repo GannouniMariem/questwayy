@@ -5,7 +5,7 @@
 <section *ngIf="formation" class="paddingBottom-100 mt-5 " style="margin-top: 100px !important">
 <div class="container">
     <div class="row">
-        
+
     <div class="col-lg-10 mt-5 text-secondary">
         <nav aria-label="breadcrumb" >
             <ol class="breadcrumb" style="background-color: transparent;">
@@ -21,29 +21,29 @@
         <div class="col-lg-10 mx-auto marginTop-30">
             <li *ngIf="formation.prix > 0" style="float: right;" class="list-inline-item mr-3">
                 <span class="h4 d-inline text-primary">
-                     TND {{ formation?.newprix > 0 ? formation?.newprix : formation?.prix }} 
-                </span> 
-                <span class="h6 d-inline small text-gray"> 
+                     TND {{ formation?.newprix > 0 ? formation?.newprix : formation?.prix }}
+                </span>
+                <span class="h6 d-inline small text-gray">
                     {{ formation?.newprix > 0 ? formation?.prix : '' }}
                 </span>
-            
+
             </li>
             <li *ngIf="formation.prix == 0" style="float: right;" class="list-inline-item mr-3">
                 <span class="h4 d-inline text-primary">
-                     FREE 
-                </span> 
-             
-            
+                     FREE
+                </span>
+
+
             </li>
             <h1> {{formation?.titre}} </h1>
 
-           
+
             <div class="row mt-3">
                 <div class="col-lg-3 col-md-6 my-2">
                     <div class="media border-right height-100p"><img class="iconbox mr-3"
                             [src]="endpoint.url + '/getfile/' + formatteur?.photo" alt="">
                         <div class="media-body"><span class="text-gray d-block" >Instructor:</span> <a href="#"
-                                class="h6" [routerLink]="['/instructor' , formatteur?.name + ' ' + formatteur?.lastname , formatteur?.name + ' ' + formatteur?._id]"> {{ formatteur?.name + ' ' + formatteur?.lastname }} </a></div>
+                                class="h6" [routerLink]="['/instructor' , formatteur?.name + formatteur?.lastname ,  formatteur?._id]"> {{ formatteur?.name + ' ' + formatteur?.lastname }} </a></div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 my-2">
@@ -53,23 +53,23 @@
                 <div class="col-lg-3 col-md-6 my-2">
                     <div class="border-right height-100p"><span class="text-gray">Reviews:</span>
                         <p class="mb-0 ">
-                            <ngb-rating class="text-warning" style="font-size: 20px;" [max]="5" [(rate)]="formation.review" [readonly]="true"></ngb-rating>    
+                            <ngb-rating class="text-warning" style="font-size: 20px;" [max]="5" [(rate)]="formation.review" [readonly]="true"></ngb-rating>
 
-                           
+
                             <span>( {{formation.numberofreview}} )</span>
                         </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 my-2">
                     <div class="text-md-right height-100p">
-                     
-                      
-                        <a *ngIf="!isMine && formation.prix != 0" class="btn btn-primary" (click)="addToCart()" > 
+
+
+                        <a *ngIf="!isMine && formation.prix != 0" class="btn btn-primary" (click)="addToCart()" >
                             <i  class="fa fa-shopping-cart mr-1" aria-hidden="true"></i>
                             Buy this course
                         </a>
 
-                        <a *ngIf="!isMine && formation.prix == 0 && formation.link.length > 0" class="btn btn-primary" (click)="addToCart()" > 
+                        <a *ngIf="!isMine && formation.prix == 0 && formation.link.length > 0" class="btn btn-primary" (click)="passFreeCommande()" >
                             <i  class="fa fa-shopping-cart mr-1" aria-hidden="true"></i>
                             Enroll for free
                         </a>
@@ -78,15 +78,15 @@
             </div><!-- END row-->
             <div class="ec-video-container my-4">
                 <iframe *ngIf="formation?.trailer.length > 20" [src]="youtube_parser(formation?.trailer)"></iframe>
-               
-               
-                
-               
+
+
+
+
                  <video *ngIf="formation?.trailer.length > 0 && formation?.trailer.length < 20" class="w-100" [src]="endpoint.url + '/getfile/' + formation?.trailer" controls></video>
-                
+
                 <img *ngIf="!formation?.trailer" class="w-100" [src]="endpoint.url + '/getfile/' + formation?.image" alt="">
             </div>
-            
+
             <div class="card padding-30 shadow-v3">
                 <h4>Features Includes:</h4>
                 <ul class="list-inline mb-0 mt-2">
@@ -98,7 +98,7 @@
                             class="ml-2">98,250 students entrolled</span></li> -->
                     <li class="list-inline-item my-2 pr-md-4"><i class="fas fa-sync small text-primary"></i> <span
                             class="ml-2">Lifetime access</span></li>
-        
+
                     <!-- <li class="list-inline-item my-2 pr-md-4"><i class="ti-crown small text-primary"></i> <span
                             class="ml-2">30-Day Money-Back Guarantee of Completion</span></li> -->
                 </ul>
@@ -107,25 +107,25 @@
                 <ul class="nav tab-line tab-line tab-line--3x border-bottom mb-5" role="tablist">
                     <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tabDescription"
                             role="tab" aria-selected="true">Description</a></li>
-                   
+
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tabInstructors" role="tab"
                             aria-selected="true">Instructors</a></li>
-              
+
                 </ul>
                 <div   class="tab-content">
                     <div  class="tab-pane fade show active" id="tabDescription" role="tabpanel">
-                     
+
                         <div class="row mt-5">
                             <div class="col-12">
                                 <h4>What Will I Learn?</h4>
                             </div>
                             <div class="col-md-6 my-2">
                                 <ul class="list-unstyled list-style-icon list-icon-check">
-                                    
+
                                     <ng-container *ngFor="let item of formation?.content;let i = index">
                                         <li *ngIf="i < formation.content.length / 2"  >{{item}}</li>
                                     </ng-container>
-                                   
+
                                 </ul>
                             </div>
                             <div class="col-md-6 my-2">
@@ -135,16 +135,16 @@
                                     </ng-container>
                                 </ul>
                             </div>
-                       
+
                         </div><!-- END row-->
-                     
+
                         <h2 class="font-weight-bold">Course Description</h2>
-                       
+
                         <div  [ngClass]="{ 'less': readmore }"  [innerHTML]="formation?.description">
 
-                       
+
                         </div>
-                       
+
                         <div class="text-center mt-5" *ngIf="formation.description.length > 1000"><a (click)="readmore = !readmore" class="btn btn-primary btn-icon"><i
                                                 class="ti-reload mr-2"></i> {{ !readmore ? 'Show less': 'Show more' }}</a></div>
 
@@ -156,15 +156,15 @@
                                 <div class="mx-auto text-center">
 
                                     <div *ngIf="user.image.length==0" class="rounded-circle mb-4 profile"  >
-                                        {{user.nom[0]}} 
-                                      
+                                        {{user.nom[0]}}
+
                                    </div>
-                                   
+
 
                                     <a *ngIf="user.image.length > 0"  class=" profile"  routerLink="/profile">
-                
-                                        <img [src]="endpoint.url + '/getfile/' + user.image" alt="" class="pr1" style="margin-top: 0;">  
-                          
+
+                                        <img [src]="endpoint.url + '/getfile/' + user.image" alt="" class="pr1" style="margin-top: 0;">
+
                                         </a>
                                     <div class="media-body"><h3 class="text-gray my-2">new review</h3>
                                         <h5> {{user.nom}} </h5>
@@ -173,7 +173,7 @@
                             </div>
                             <div class="col-md-8 my-2">
                                 <p class="text-warning" style="font-size: 24px;">
-                                    <ngb-rating [max]="5" [(rate)]="review.review" [readonly]="false"></ngb-rating>    
+                                    <ngb-rating [max]="5" [(rate)]="review.review" [readonly]="false"></ngb-rating>
                                 </p>
                                 <label for="">Commentaire </label>
                                 <textarea [(ngModel)]="review.comment" class="form-control" name="" id="" cols="30" rows="4"></textarea>
@@ -185,15 +185,15 @@
                             <div class="col-md-4 text-center">
                                 <h1 class="display-4 text-primary mb-0"> {{formation?.numberofreview}} </h1>
                                 <p class="text-warning" style="font-size: 24px;">
-                                    <ngb-rating [max]="5" [(rate)]="formation.review" [readonly]="true"></ngb-rating>    
+                                    <ngb-rating [max]="5" [(rate)]="formation.review" [readonly]="true"></ngb-rating>
                                 </p>
                                 <p class="mb-0">Average Rating</p>
                             </div>
                             <div class="col-md-8">
                                 <div class="d-flex align-items-center mb-2">
                                         <div class="width-7rem text-warning d-none d-lg-block mr-3"  style="font-size: 24px;">
-                                            <ngb-rating [max]="5" [(rate)]="reviewsType[0]" [readonly]="true"></ngb-rating>    
-                                       
+                                            <ngb-rating [max]="5" [(rate)]="reviewsType[0]" [readonly]="true"></ngb-rating>
+
                                         </div>
                                     <div class="progress flex-auto mr-3" style="height: 10px">
                                         <div class="progress-bar bg-primary" [ngStyle]="{'width.%': (reviews5[0] * 100 ) / formation.numberofreview }"
@@ -203,8 +203,8 @@
                                 </div>
                                 <div class="d-flex align-items-center mb-2">
                                     <div class="width-7rem text-warning d-none d-lg-block mr-3"  style="font-size: 24px;">
-                                        <ngb-rating [max]="5" [(rate)]="reviewsType[1]" [readonly]="true"></ngb-rating>    
-                                   
+                                        <ngb-rating [max]="5" [(rate)]="reviewsType[1]" [readonly]="true"></ngb-rating>
+
                                     </div>
                                 <div class="progress flex-auto mr-3" style="height: 10px">
                                     <div class="progress-bar bg-primary" [ngStyle]="{'width.%': (reviews5[1] * 100 ) / formation.numberofreview }"
@@ -216,8 +216,8 @@
 
                             <div class="d-flex align-items-center mb-2">
                                 <div class="width-7rem text-warning d-none d-lg-block mr-3"  style="font-size: 24px;">
-                                    <ngb-rating [max]="5" [(rate)]="reviewsType[2]" [readonly]="true"></ngb-rating>    
-                               
+                                    <ngb-rating [max]="5" [(rate)]="reviewsType[2]" [readonly]="true"></ngb-rating>
+
                                 </div>
                             <div class="progress flex-auto mr-3" style="height: 10px">
                                 <div class="progress-bar bg-primary" [ngStyle]="{'width.%': (reviews5[2] * 100 ) / formation.numberofreview }"
@@ -229,8 +229,8 @@
 
                         <div class="d-flex align-items-center mb-2">
                             <div class="width-7rem text-warning d-none d-lg-block mr-3"  style="font-size: 24px;">
-                                <ngb-rating [max]="5" [(rate)]=" reviewsType[3]" [readonly]="true"></ngb-rating>    
-                           
+                                <ngb-rating [max]="5" [(rate)]=" reviewsType[3]" [readonly]="true"></ngb-rating>
+
                             </div>
                         <div class="progress flex-auto mr-3" style="height: 10px">
                             <div class="progress-bar bg-primary" [ngStyle]="{'width.%': (reviews5[3] * 100 ) / formation.numberofreview }"
@@ -241,8 +241,8 @@
 
                     <div class="d-flex align-items-center mb-2">
                         <div class="width-7rem text-warning d-none d-lg-block mr-3"  style="font-size: 24px;">
-                            <ngb-rating [max]="5" [(rate)]="reviewsType[4]" [readonly]="true"></ngb-rating>    
-                       
+                            <ngb-rating [max]="5" [(rate)]="reviewsType[4]" [readonly]="true"></ngb-rating>
+
                         </div>
                     <div class="progress flex-auto mr-3" style="height: 10px">
                         <div class="progress-bar bg-primary" [ngStyle]="{'width.%': (reviews5[4] * 100 ) / (formation?.numberofreview == 0 ? 1 : formation?.numberofreview) }"
@@ -252,20 +252,20 @@
                 </div>
                             </div>
                         </div>
-                
+
                     <ng-container *ngFor="let rev of reviews;let i = index">
                         <div *ngIf="i < maxReview" class="row border-bottom mx-0 py-4 mt-4 shadow-v3">
                             <div class="col-md-4 my-2 media">
                                 <div *ngIf="rev.users[0].image.length==0" class="rounded-circle m-3 profile" style="width: 70px;height: 70px;font-size: 30px;"  >
-                                    {{rev.users[0].nom[0]}} 
-                                  
+                                    {{rev.users[0].nom[0]}}
+
                                </div>
-                               
+
 
                                 <a *ngIf="rev.users[0].image.length > 0"  class=" m-3 profile" style="width: 70px;height: 70px;"  routerLink="/profile">
-            
-                                    <img [src]="endpoint.url + '/getfile/' + rev.users[0].image" alt="" class="pr1" style="width: 70px;height: 70px;margin-top: 0px;" >  
-                      
+
+                                    <img [src]="endpoint.url + '/getfile/' + rev.users[0].image" alt="" class="pr1" style="width: 70px;height: 70px;margin-top: 0px;" >
+
                                     </a>
                                 <div class="media-body ml-4 mt-4"><small class="text-gray"> {{ rev.date | date }} </small>
                                     <h6>{{ rev.users[0].nom }} </h6>
@@ -274,50 +274,50 @@
                             <div class="col-md-8 my-2">
 
                                 <p class="text-warning" style="font-size: 24px;">
-                                    <ngb-rating [max]="5" [(rate)]="rev.review" [readonly]="true"></ngb-rating>    
+                                    <ngb-rating [max]="5" [(rate)]="rev.review" [readonly]="true"></ngb-rating>
                                 </p>
 
 
                                 <p class="font-size-18"> {{rev.comment}} </p>
-                               
+
                             </div>
                         </div><!-- END row-->
                     </ng-container>
                         <div class="text-center mt-5" *ngIf="reviews?.length > maxReview"><a (click)="maxReview = maxReview + 3" class="btn btn-primary btn-icon"><i
                                     class="ti-reload mr-2"></i> Load More</a></div>
                     </div><!-- END tab-pane-->
-              
+
                     <div class="tab-pane fade" id="tabInstructors" role="tabpanel">
                         <h4 class="mb-4">About Instructors</h4>
                         <div class="border-bottom mb-4 pb-4">
-                            <div class="d-md-flex mb-4"><a href="#"><img class="iconbox iconbox-xxxl"
+                            <div class="d-md-flex mb-4"><a [routerLink]="['/instructor' , formatteur.name + formatteur.lastname , formatteur._id]"><img class="iconbox iconbox-xxxl"
                                         [src]="endpoint.url + '/getfile/' + formatteur?.photo" alt=""></a>
                                 <div class="media-body ml-md-4 mt-4 mt-md-0">
-                                    <h6>{{ formatteur?.name + ' ' + formatteur?.lastname }}</h6>
+                                    <h2 style="cursor: pointer;"  [routerLink]="['/instructor' , formatteur.name + formatteur.lastname , formatteur._id]">{{ formatteur?.name + ' ' + formatteur?.lastname }}</h2>
                                     <p class="mb-2"><i class="ti-world mr-2"></i> {{ formatteur?.fonction }}
                                     </p>
 
                                     <p class="mb-2"><i class="ti-email mr-2"></i> {{ formatteur?.email }}
                                     </p>
-                    
+
                                 </div>
                             </div>
                             <h6>Bio</h6>
                             <p> {{ formatteur?.bio }} </p>
                         </div>
-               
+
                     </div><!-- END tab-pane -->
-               
+
                 </div><!-- END tab-content-->
 
-             
+
             </div><!-- END col-12 -->
 
 
-          
+
 
         </div><!-- END col-lg-9 -->
-      
+
     </div><!-- END row-->
 </div><!-- END container-->
 </section>

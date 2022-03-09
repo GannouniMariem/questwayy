@@ -7,7 +7,7 @@ import { EndpointService } from './endpoint.service';
 })
 export class FormationService {
 
-  
+
   constructor(private http: HttpClient , public path: EndpointService) { }
 
   private urlformation = this.path.url + '/formation/';
@@ -15,20 +15,25 @@ export class FormationService {
 
 
   myFormations = [];
-  
+
 
 
   getAllformation(){
 
     return this.http.get<any>(this.urlformation + "getformation" );
-    
+
   }
 
 
   getfeaturedformation(){
 
     return this.http.get<any>(this.urlformation + "getfeaturedformation" );
-    
+
+  }
+  getformationtoupdatepanier(){
+
+    return this.http.get<any>(this.urlformation + "getformationtoupdatepanier" );
+
   }
 
 
@@ -38,6 +43,11 @@ export class FormationService {
 
   }
 
+  getformationByIdFormatteur(id: any){
+
+    return this.http.get<any>(this.urlformation +"getformationbyidformatteur/" + id);
+
+  }
   gettopformation(cat: any){
 
     return this.http.get<any>(this.urlformation +"gettopformation/" + cat);
@@ -69,7 +79,7 @@ export class FormationService {
 
   }
 
-  
+
 
   getrecomendedformationbycategorie(cat: any){
 

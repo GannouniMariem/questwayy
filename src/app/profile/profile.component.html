@@ -1,13 +1,15 @@
-<div class="container mt-5">
-    <nav aria-label="breadcrumb" >
-        <ol class="breadcrumb" style="background-color: transparent;">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-      
-          <li class="breadcrumb-item active" aria-current="page">profile</li>
-        </ol>
-      </nav>
-</div>
+
 <section class="paddingTop-50 paddingBottom-100 bg-light">
+
+<div class="container " style="margin-top: 100px;">
+  <nav aria-label="breadcrumb"  >
+    <ol class="breadcrumb" style="background-color: transparent;">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+
+      <li class="breadcrumb-item active" aria-current="page">profile</li>
+    </ol>
+  </nav>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-lg-4 mt-4">
@@ -18,22 +20,22 @@
 
                     <label for="upt">
                         <i (click)="updateTogglePhoto = !updateTogglePhoto" class="fas fa-camera icon"></i>
-                    </label>  
+                    </label>
                    </div>
-                    
-                    <button (click)="updatePhoto()" *ngIf="url" class="btn btn-primary btn-sm my-2"  >Enregistrer 
+
+                    <button (click)="updatePhoto()" *ngIf="url" class="btn btn-primary btn-sm my-2"  >Enregistrer
                         <div   *ngIf="showSpinnerUpdatePhoto" class="spinner-border  " role="status">
                             <span class="visually-hidden"></span>
                           </div>
                     </button>
 
                     <div *ngIf="user.image.length==0 && !url" class="rounded-circle mb-4 profile"  >
-                         {{user.nom[0]}} 
+                         {{user.nom[0]}}
                          <label for="upt">
                              <i (click)="updateTogglePhoto = !updateTogglePhoto" class="fas fa-camera icon"></i>
-                         </label>   
+                         </label>
                     </div>
-                    
+
                     <input #fileInput (change)="onAdd($event)"  style="display: none;" type="file" id="upt">
                     <h4> {{ user.nom }} </h4>
                     <p> Student </p>
@@ -48,10 +50,10 @@
                     <ul class="list-unstyled">
                         <li class="mb-3"><span class="d-block">Email address:</span> <a class="h6"
                                 href="mailto:saifullah@gmail.com">{{ user.email }} </a></li>
-                  
+
                     </ul>
                 </div>
-  
+
             </div>
         </div><!-- END col-md-4 -->
         <div class="col-lg-8 mt-4">
@@ -64,7 +66,7 @@
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Tabs_1-3" role="tab"
                                 aria-selected="true"><i class="fas fa-graduation-cap mr-1"></i> My courses</a></li>
                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Tabs_1-4" role="tab"
-                                    aria-selected="true"><i class="fas fa-user-cog mr-1"></i> Setting</a></li>                
+                                    aria-selected="true"><i class="fas fa-user-cog mr-1"></i> Setting</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="Tabs_1-1" role="tabpanel">
@@ -84,13 +86,13 @@
                                         <td style="display: flex;">
                                             <img  *ngFor="let img of cmd.formations" style="width: 40px; height: 40px; margin-left: -12px ;  border-radius: 50%; object-fit: cover;border: 3px solid white;" [src]="endpoint.url + '/getfile/' + img.image" alt="">
                                         </td>
-                                        
+
                                         <td> {{ cmd.date | date }} </td>
                                         <td *ngIf="cmd.prix>0"> {{ cmd.prix }} TND </td>
                                         <td *ngIf="cmd.prix==0"> FREE </td>
-                                        
+
                                     </tr>
-                                  
+
                                 </tbody>
                             </table>
                         </div>
@@ -101,7 +103,7 @@
                                 <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
                                     [src]="endpoint.url + '/getfile/' + f.image" alt=""></a>
                                 <div class="p-3"><a  [routerLink]="['/detail', f.titre , f._id]" class="h6 title"> {{f.titre}} </a>
-                                    
+
                                 </div>
                                 <div class="media border-top p-3 align-items-center justify-content-between"   >
                                     <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  f.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
@@ -118,7 +120,7 @@
                                 </div>
                                 </div>
                             </div>
-                    
+
                         </div><!-- END row-->
                     </div><!-- END tab-pane -->
                     <div class="tab-pane fade" id="Tabs_1-3" role="tabpanel">
@@ -127,7 +129,7 @@
                                 <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
                                     [src]="endpoint.url + '/getfile/' + f.image" alt=""></a>
                                 <div class="p-3"><a  [routerLink]="['/detail', f.titre , f._id]" class="h6 title"> {{f.titre}} </a>
-                                    
+
                                 </div>
                                 <div class="media border-top p-3 align-items-center justify-content-between"   >
                                     <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  f.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
@@ -144,26 +146,26 @@
                                 </div>
                                 </div>
                             </div>
-                    
+
                         </div><!-- END row-->
                     </div><!-- END tab-pane -->
 
 
                     <div class="tab-pane fade" id="Tabs_1-4" role="tabpanel">
                         <div class="row">
-                       
+
                             <label for="name">Name:</label>
                             <input  [(ngModel)]="user.nom"  type="text" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testName}">
-                    
+
                             <label for="name">E-mail:</label>
                             <input  [(ngModel)]="user.email"   type="text" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testEmail}">
-                    
+
                             <label for="name">New Password:</label>
                             <input  [(ngModel)]="user.password"  type="text" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testPassword}">
-                            
+
                             <label for="name">Confirme password:</label>
                             <input  [(ngModel)]="confirmePassword"  type="text" [ngClass]="{'form-control': true, 'w-100':true , 'mt-2':true ,'error' : testConfirme}">
-                    
+
 
                             <button (click)="updateUser()" class="btn btn-primary mt-2"> Save changes </button>
                         </div><!-- END row-->

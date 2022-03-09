@@ -4,6 +4,8 @@ import { EndpointService } from '../services/endpoint.service';
 import { PanierService } from '../services/panier.service';
 import Swal from 'sweetalert2';
 import { CommandeService } from '../services/commande.service';
+import { PromoService } from '../services/promo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panier',
@@ -16,34 +18,41 @@ export class PanierComponent implements OnInit {
     public panier: PanierService,
     public endpoint: EndpointService,
     public _auth: AuthService,
-    private _commande: CommandeService
+    private _commande: CommandeService,
+    private _promo: PromoService,
+    private router: Router
     ) { }
 
 
-  step1 = false;  
-
+  step1 = false;
+  totalPrice = 0;
+  code = {
+    code: ''
+  }
 
   commande = {
 
-    idUser: '',
+
     idFormation: [],
-    date: '',
-    prix: 0,
-    access: false,
     adress: '',
     tel: '',
-    poste: ''
+    poste: '',
+    code: ''
 
-  }  
+  }
 
 
   testAdress = false;
   testTel = false;
   testPoste = false;
+  testCode = false;
 
-  
+  testApplyed = false;
+
+
 
   ngOnInit(): void {
+    this.calculTotal()
   }
 
 
@@ -51,40 +60,18 @@ export class PanierComponent implements OnInit {
   calculTotal(){
     let total = 0;
     for(let p of this.panier.panier.panier){
-      total += p.newprix ? parseInt( p.newprix ): parseInt( p.prix ); 
+      total += p.newprix ? parseFloat( p.newprix ): parseFloat( p.prix );
     }
 
-    return total;
+    this.totalPrice = total;
 
   }
 
 
 
 
-  procced(){
-
-    if(this._auth.loggedIn()){
-      this.commande.idUser = this._auth.getUserData()._id;
-
-      for(let p of this.panier.panier.panier){
-
-        this.commande.idFormation.push(p._id);
-
-      }
-      this.commande.prix = this.calculTotal();
-
-      this.step1 =  true;
-
-    }else{
-
-      Swal.fire('Oops...', 'Login to your account first!', 'error')
-
-    }
-
-  }
-
-
-
+  resultOfSaveCommande : any;
+  myresponse: any;
 
   checkout(){
 
@@ -113,35 +100,120 @@ export class PanierComponent implements OnInit {
       countError++;
     }
 
-    if (countError === 0) {
 
-      this._commande.passer(this.commande).subscribe(
-        res=>{
-          Swal.fire('Verified', 'Success .. ...... .......!', 'success');
-          this.panier.viderPanier();
-          this.commande = {
+    if(this._auth.loggedIn()){
 
-            idUser: '',
-            idFormation: [],
-            date: '',
-            prix: 0,
-            access: false,
-            adress: '',
-            tel: '',
-            poste: ''
-        
-          }
+
+      for(let p of this.panier.panier.panier){
+
+        this.commande.idFormation.push(p._id);
+
+      }
+
+      if (countError === 0) {
+        this.commande.code = this.code.code;
+        if(this.totalPrice > 0){
+          this._commande.passer(this.commande).subscribe(
+            res=>{
+              Swal.fire('Verified', 'Success .. ...... .......!', 'success');
+
+              this.commande = {
+
+                idFormation: [],
+                adress: '',
+                tel: '',
+                poste: '',
+                code: ''
+
+              }
+
+              this.resultOfSaveCommande = res;
+              localStorage.setItem('orderId' , this.resultOfSaveCommande._id);
+
+              window.location.href = 'https://api.questwaycompany.com/paiment/' + this.resultOfSaveCommande._id;
+
+
+
+            }
+          );
+        }else{
+          this._commande.passerFree(this.commande).subscribe(
+            res=>{
+
+              this.commande = {
+                idFormation: [  ],
+                adress:'',
+                tel:'',
+                poste:'',
+                code:''
+              }
+              this.myresponse = res;
+              localStorage.setItem('orderId' , this.myresponse._id);
+              this.router.navigate(['/success'])
+            },
+            err=>{
+              console.log(err);
+
+            }
+          );
         }
-      );
 
+
+      }
+
+    }else{
+
+      Swal.fire('Oops...', 'Login to your account first!', 'error')
 
     }
 
 
 
+
+
+
   }
+  testCodeResponse: any;
+  validate(){
+    this.testCode = false;
+    if(this.code.code.length == 0){
+      this.testCode = true;
+    }else{
+      this._promo.verifCode(this.code).subscribe(
+        res=>{
+          this.testCodeResponse = res;
+          console.log(res);
+
+          if(this.testCodeResponse.message == 'success'){
+            let total = 0;
+            for(let p of this.panier.panier.panier){
+
+              for(let f of this.testCodeResponse.code.formations){
+                if(p._id == f._id){
+                  total += p.newprix ? parseFloat( p.newprix ) - (parseFloat( p.newprix ) * parseFloat(this.testCodeResponse.code.percent) ) / 100:  parseFloat( p.prix ) - ( parseFloat( p.prix ) * parseFloat(this.testCodeResponse.code.percent) ) / 100;
+                } else{
+                   total += p.newprix ? parseFloat( p.newprix ): parseFloat( p.prix );
+
+                }
+
+              }
 
 
+            }
+
+            this.totalPrice = total;
+            this.testApplyed = true;
+
+          }
+
+        },
+        err=>{
+          console.log(err);
+
+        }
+      );
+    }
+  }
 
 
 }

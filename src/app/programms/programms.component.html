@@ -31,6 +31,7 @@
     <div class="row">
         
         <div class="col-12" *ngIf="forma.formations.length>2 ">
+            <h1>kdjl</h1>
             <owl-carousel-o  [options]="customOptions" class="arrow-on-hover" data-space="30" data-arrow="true">
                 <ng-container *ngFor="let f of forma.formations">
                     <ng-template carouselSlide [id]="f._id">
@@ -62,6 +63,7 @@
             
           </div>
           <div class="col-12" *ngIf="forma.formations.length>1 && forma.formations.length<3 && screenWidth < 700 ">
+            <h1>kdjl</h1>
             <owl-carousel-o  [options]="customOptions" class="arrow-on-hover" data-space="30" data-arrow="true">
                 <ng-container *ngFor="let f of forma.formations">
                     <ng-template carouselSlide [id]="f._id">
@@ -94,9 +96,9 @@
           </div>
         <ng-container *ngIf="forma.formations.length<3 && screenWidth > 700" >
             <div *ngFor="let f of forma.formations" class="col-lg-4 col-md-6 marginTop-30">
-                <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
+                <div class="card text-gray height-100p shadow-v2"><a  [routerLink]="['/detail', f.titre , f._id]" ><img class="card-img-top imgf"
                     [src]="endpoint.url + '/getfile/' + f.image" alt=""></a>
-                <div class="p-3"><a  [routerLink]="['/detail' , f._id]" class="h6 title"> {{f.titre}} </a>
+                <div class="p-3"><a  [routerLink]="['/detail', f.titre , f._id]" class="h6 title"> {{f.titre}} </a>
                     <p class="my-2"><i class="ti-user mr-2"></i>  {{ f.formatteur }}  </p>
                     
                 </div>
@@ -120,9 +122,9 @@
         
         <ng-container *ngIf="forma.formations.length<2 && screenWidth < 700" >
             <div *ngFor="let f of forma.formations" class="col-lg-4 col-md-6 marginTop-30">
-                <div class="card text-gray height-100p shadow-v2"><a  routerLink="/detail" ><img class="card-img-top imgf"
+                <div class="card text-gray height-100p shadow-v2"><a  [routerLink]="['/detail', f.titre , f._id]" ><img class="card-img-top imgf"
                     [src]="endpoint.url + '/getfile/' + f.image" alt=""></a>
-                <div class="p-3"><a  [routerLink]="['/detail' , f._id]" class="h6 title"> {{f.titre}} </a>
+                <div class="p-3"><a  [routerLink]="['/detail', f.titre , f._id]" class="h6 title"> {{f.titre}} </a>
                     <p class="my-2"><i class="ti-user mr-2"></i>  {{ f.formatteur }}  </p>
                     
                 </div>

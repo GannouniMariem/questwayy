@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CommandeService } from '../services/commande.service';
+import { PanierService } from '../services/panier.service';
 
 @Component({
   selector: 'app-payed',
@@ -7,9 +10,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PayedComponent implements OnInit {
 
-  constructor() { }
+  constructor( private _commande: CommandeService , private router: Router , private panier: PanierService ) { }
 
+  orderId = '';
+  success = true;
+  order : any;
   ngOnInit(): void {
+    this.panier.viderPanier();
+    this.orderId = localStorage.getItem('orderId');
+    if(this.orderId && this.orderId.length > 0){
+
+      this._commande.getCommandeById(this.orderId).subscribe(
+        res=>{
+          this.order = res;
+          if(this.order.access){
+            this.success = true
+          }else{
+            this.success = false;
+
+          }
+
+
+
+        },
+        err=>{
+          this.success = false;
+        }
+      );
+
+    }else{
+      this.router.navigate(['/panier']);
+    }
+
   }
 
 }

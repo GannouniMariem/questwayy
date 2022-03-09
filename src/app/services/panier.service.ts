@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormationService } from './formation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PanierService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient , private _formation: FormationService) { }
 
+  formation: any;
 
   panier = {
     panier: []
@@ -19,6 +21,31 @@ export class PanierService {
 
     if(p){
       this.panier = JSON.parse(p);
+
+      this._formation.getformationtoupdatepanier().subscribe(
+        res=>{
+          this.formation = res;
+
+          for(let f of this.formation){
+            for(let fp  of this.panier.panier){
+
+              if(f._id == fp._id){
+
+                  fp.prix = f.prix;
+                  fp.newprix = f.newprix;
+
+
+              }
+
+
+            }
+          }
+
+        }
+      );
+
+
+
     } else {
 
       localStorage.setItem('panier' , JSON.stringify(this.panier));
@@ -36,11 +63,11 @@ export class PanierService {
         this.panier.panier.push(produit);
 
         localStorage.setItem('panier' , JSON.stringify(this.panier));
-    
+
         this.initPanier();
       }
 
-    
+
 
   }
 

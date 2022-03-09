@@ -15,7 +15,7 @@ import { WishlistService } from 'src/app/services/wishlist.service';
 export class HeaderComponent implements OnInit {
 
   constructor( private _categorie: CategorieService,
-    public _auth: AuthService, 
+    public _auth: AuthService,
     public endpoint: EndpointService ,
     private _wish: WishlistService,
     public panier: PanierService,
@@ -32,16 +32,16 @@ wishlist : any;
     key= '';
   ngOnInit(): void {
 
-        
+
     this._categorie.getAllSousCategorie().subscribe(
       res=>{
         this.categories = res;
         console.log(res);
-        
+
       }
     );
-    
-    
+
+
     this.user = this._auth.getUserData();
 
 
@@ -49,7 +49,7 @@ wishlist : any;
       res=>{
         this.wish = res;
         this._wish.wishlist = [...this.wish];
-     
+
         if(this._wish.wishlist.length > 0){
           this._wish.getwishlist().subscribe(
             res=>{
@@ -60,15 +60,15 @@ wishlist : any;
       }
     );
 
-  
- 
+
+
 
 
 
     this._commande.getMyCommande(this.user._id).subscribe(
       res=>{
         this.commandes = res;
-    
+
 
         for(let c of this.commandes){
 
@@ -78,14 +78,18 @@ wishlist : any;
 
         }
         this._formation.myFormations = [...this.formations];
-  
+
 
       }
     );
 
 
-   
 
+
+  }
+
+  go(){
+    window.location.href = 'https://questwaycompany.com/result/' + this.key
   }
 
 }

@@ -9,6 +9,7 @@ import { PanierService } from '../services/panier.service';
 import { AuthService } from '../services/auth.service';
 import { WishlistService } from '../services/wishlist.service';
 import { ReviewService } from '../services/review.service';
+import { CommandeService } from '../services/commande.service';
 
 @Component({
   selector: 'app-detail',
@@ -29,7 +30,8 @@ export class DetailComponent implements OnInit {
     private _wish: WishlistService,
     private _auth: AuthService,
     private _review: ReviewService,
-    private router : Router
+    private router : Router,
+    private _commande: CommandeService
      ) { }
 
 
@@ -37,10 +39,10 @@ export class DetailComponent implements OnInit {
      id:any;
      formation:any;
      categories:any;
-     response: any; 
-     formatteur: any; 
+     response: any;
+     formatteur: any;
      readmore = true;
-   
+
      user: any;
      reviews:any;
      reviewsType = [1,2,3,4,5];
@@ -49,7 +51,7 @@ export class DetailComponent implements OnInit {
      rating = 1;
      isMine = false;
      maxReview = 3;
-      
+
 
      review = {
 
@@ -94,26 +96,26 @@ export class DetailComponent implements OnInit {
 
             }
             console.log(this.reviewsToCount);
-            
+
 
             console.log(this.reviews5);
-            
+
             let index = this.reviews.findIndex(x => x.idUser === this.user._id);
             if(index > -1){
               this.review = this.reviews[index];
               this.reviews.splice(index, 1);
 
             }
-         
-            
+
+
 
           }
         );
 
 
 
-  
-        
+
+
       }
     );
 
@@ -123,7 +125,7 @@ export class DetailComponent implements OnInit {
   youtube_parser(url){
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);
-    
+
     return this.sanitizer.bypassSecurityTrustResourceUrl( 'https://www.youtube.com/embed/'+ match[7] +'?rel=0' );
   }
 
@@ -145,15 +147,64 @@ export class DetailComponent implements OnInit {
         this.router.navigate(['/panier']);
       }
     })
-    
-      
+
+
 
 
   }
 
+  cmd = {
+    idFormation: [  ],
+    adress:'',
+    tel:'',
+    code:''
+  }
 
 
-  
+  myresponse: any;
+  passFreeCommande(){
+    this.cmd.idFormation = [...[]];
+    this.cmd.idFormation.push(this.id);
+    Swal.fire({
+      title: 'Enroll ?',
+      text: "Enroll for free",
+      icon: 'success',
+      showCancelButton: true,
+      cancelButtonText: 'find more courses',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Enroll'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+
+        this._commande.passerFree(this.cmd).subscribe(
+          res=>{
+
+            this.cmd = {
+              idFormation: [  ],
+              adress:'',
+              tel:'',
+              code:''
+            }
+            this.myresponse = res;
+            localStorage.setItem('orderId' , this.myresponse._id);
+            this.router.navigate(['/success'])
+          },
+          err=>{
+            console.log(err);
+
+          }
+        );
+
+      }
+    })
+  }
+
+
+
+
+
   newWish : any;
   addToWishList(idF:any){
 
@@ -164,26 +215,26 @@ export class DetailComponent implements OnInit {
       this._wish.addWishList(idF).subscribe(
         res=>{
           this.newWish = res;
-          
+
           if(this.newWish.stat == 'deleted'){
             console.log(this.newWish);
-  
+
             this._wish.wishlist.splice( this._wish.wishlist.indexOf(this.newWish.id) ,1);
           }else{
             console.log(this.newWish);
-  
+
             this._wish.wishlist.push(this.newWish.id);
-  
+
           }
-         
-          
+
+
         }
       );
     }else{
       Swal.fire('Oops...', 'Login to your account first!', 'error')
     }
 
-  
+
 
 
   }
@@ -204,7 +255,7 @@ export class DetailComponent implements OnInit {
         },
         err=>{
           console.log(err);
-          
+
           Swal.fire('Oops...', 'error in review!', 'error')
         }
       );
@@ -218,15 +269,15 @@ export class DetailComponent implements OnInit {
       this._review.updateReview(this.review).subscribe(
         res=>{
           Swal.fire('Sent...', 'Review updated successfuly!', 'success');
-          
+
         },
         err=>{
           console.log(err);
-          
+
           Swal.fire('Oops...', 'error in updating review!', 'error')
         }
       );
-      
+
   }
 
 
