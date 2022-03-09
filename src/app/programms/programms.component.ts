@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategorieService } from '../services/categorie.service';
 import { EndpointService } from '../services/endpoint.service';
@@ -32,7 +32,7 @@ export class ProgrammsComponent implements OnInit {
       400: {
         items: 1
       },
-      740: {
+      640: {
         items: 2
       },
       940: {
@@ -42,9 +42,9 @@ export class ProgrammsComponent implements OnInit {
     nav: true
   }
 
+  screenWidth = 0;
 
 
-  
   constructor(
 
     private route: ActivatedRoute,
@@ -56,6 +56,14 @@ export class ProgrammsComponent implements OnInit {
 
   ) { }
 
+  @HostListener('window:resize', ['$event'])
+    onResize(event?) {
+      
+      this.screenWidth = window.innerWidth;
+      console.log(this.screenWidth);
+      
+      
+    }
 
   categorie:any;
   formations:any;  
@@ -73,7 +81,8 @@ export class ProgrammsComponent implements OnInit {
           res=>{
             this.formationsbycat = res;
     
-         
+     
+            
     
           }
         );
