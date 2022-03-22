@@ -1,1 +1,46 @@
-<p>about works!</p>
+
+
+<div class="card text-center">
+    <div class="card-body">
+        <img [src]="  endpoint?.url + '/getfile/' + formatteur?.photo" class="rounded-circle  img-thumbnail" style="height: 150px;width: 150px;" alt="profile-image">
+
+        <h4 class="mb-0 mt-2"> {{ formatteur.name + ' ' + formatteur.lastname }} </h4>
+        <p class="text-muted font-14">Instructor</p>
+
+   
+        <div class="text-start mt-3 w-100">
+            <h4 class="font-13 text-uppercase">Bio :</h4>
+            <p class="text-muted font-13 mb-3">
+                {{ formatteur.bio }}
+            </p>
+
+            <p class="text-muted text-left mb-2 font-13"><strong>Full Name :</strong> <span class="ms-2">{{ formatteur.name + ' ' + formatteur.lastname }}</span></p>
+
+            <p class="text-muted text-left mb-2 font-13"><strong>Mobile :</strong><span class="ms-2"> {{formatteur.tel}} </span></p>
+
+            <p class="text-muted text-left mb-2 font-13"><strong>Email :</strong> <span class="ms-2 "> {{ formatteur.email }} </span></p>
+
+            <p class="text-muted text-left mb-2 font-13"><strong>About me :</strong> <span class="ms-2 "> {{ formatteur.about }} </span></p>
+
+        </div>
+
+        <ul class="social-list list-inline mt-3 mb-0">
+            <li class="list-inline-item" *ngIf="formatteur.facebook.length>0">
+                <a  class="social-list-item border-primary text-primary" [href]="formatteur.facebook" target="_blank">
+                    <i class="fab fa-facebook m-2" style="font-size: 21px;"></i>
+                </a>
+            </li>
+            <li class="list-inline-item" *ngIf="formatteur.instagram.length>0">
+                <a  class="social-list-item border-danger text-danger" [href]="formatteur.instagram" target="_blank">
+                    <i class="fab fa-instagram m-2" style="font-size: 21px;"></i>
+                </a>
+            </li>
+            <li class="list-inline-item" *ngIf="formatteur.linkedin.length>0">
+                <a  class="social-list-item border-info text-info" [href]="formatteur.linkedin" target="_blank">
+                    <i class="fab fa-linkedin m-2" style="font-size: 21px;"></i>
+                </a>
+            </li>
+   
+        </ul>
+    </div> <!-- end card-body -->
+</div>

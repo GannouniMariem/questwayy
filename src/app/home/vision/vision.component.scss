@@ -1,0 +1,192 @@
+.vision{
+    margin-top: -200px !important;
+    width: 100% ;
+    height: 275vh !important;
+    background-image: url(/assets/images/vision/bg_vision.png);
+  
+    background-size: 100%;
+     
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.vision-title{
+    line-height: 45px;
+    font-family: poppins;
+    font-size: 52px;
+    float: right;
+    font-weight: 700!important;
+    color: #292929;
+    margin: 15px 0;
+  
+    position: absolute;
+    top:0;
+    right:50px;
+    z-index: 999;
+}
+
+.vision-title::before{
+    content:'';
+    width: 120% !important;
+    height: 28px !important;
+    background-color: #0071bb !important;
+    position: absolute;
+    right:-50px;
+    bottom:-8px;
+    z-index: -1;
+}
+
+
+
+.vision-img,
+.vision-img-rev,
+.vision-img-2{
+  
+    height: 70%;
+    width: 70%;
+    filter: drop-shadow(0 10px 34px rgba(0,0,0,.2));
+    z-index: 1;
+    background-color: #fcece1;
+    border-radius: 10px;
+}
+
+
+
+.vision-desc,
+.vision-desc-rev,
+.vision-desc-2{
+  z-index: 999;
+
+}
+
+
+.vision-btn{
+  background: #e16310;
+  box-shadow: 0 4px 42px #00000026;
+  border-radius: 8px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 21px;
+  padding: 8px 20px;
+
+  width: 80%;
+  color: #fff;
+  position: absolute;
+  bottom: 0;  
+  
+}
+
+.vision-block{
+    width: 120%;
+}
+
+@media (max-width: 320px){
+  .vision{
+    height:1150px;
+  } 
+}
+
+@media (min-width: 360px){
+  .vision{
+    height:1300px;
+  }  
+}
+
+@media (min-width: 400px){
+  .vision{
+    height:1400px;
+  } 
+}
+
+@media (min-width: 478px){
+  .vision{
+    height:1700px;
+  } 
+
+    .vision-img,
+    .vision-img-rev,
+    .vision-img-2{
+        height: 80%;
+        width: 80%;
+      border-radius: 20px;
+    }
+
+    
+}
+
+@media (min-width: 786px){
+  .vision{
+    height:350vh;
+  }
+
+  
+  .vision-img,
+  .vision-img-rev,
+  .vision-img-2{
+      height: 100%;
+      width: 100%;
+    border-radius: 58px;
+
+  }
+}
+
+@media (min-width: 1024px){
+ 
+  .vision-img,
+  .vision-img-rev,
+  .vision-img-2{
+      height: 400px;
+      width: 600px;
+    }
+  .vision-btn{
+    width: 400px;
+    transform: translateX(80%);
+    line-height: 52px;
+  }
+
+  .vision-block{
+    position: relative;
+  } 
+  .vision-desc{
+    width: 600px;
+    position: absolute;
+    left:10%;
+  }
+  .vision-desc-rev{
+    width: 600px;
+    position: absolute;
+    left:48%;
+    transform: translateY(150%);
+  }
+  .vision-desc-2{
+    width: 600px;
+    position: absolute;
+    left:10%;
+    transform: translateY(315%);
+  }
+  .vision-img{
+    position: absolute;
+    top:100px;
+    left: 30%;
+  }   
+
+  .vision-img-rev{
+    position: absolute;
+    top:200px;
+    left: 10%;
+    transform: translateY(150%);
+  }
+  .vision-img-2{
+   
+    position: absolute;
+    top:200px;
+    left: 30%; 
+    transform: translateY(315%);
+    display: flex;
+    justify-content:end;
+  }
+
+}
+
+@media (min-width: 1920px){}

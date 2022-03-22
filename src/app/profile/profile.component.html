@@ -109,7 +109,7 @@
                                     <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  f.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
                                         <h4 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="f.prix == 0"  ><span class="text-primary"> FREE</span></h4>
 
-                                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="f.prix > 0" [ngClass]="{'deleted':  f.newprix > 0}" ><span class="text-primary"> {{ f.prix }} TND</span></h4>
+                                        <h4 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="f.prix > 0" [ngClass]="{'deleted':  f.newprix > 0}" ><span [ngClass]="{'text-primary' : f.newprix == 0 }"> {{ f.prix }} TND</span></h4>
                                         <h4 class="h5" style="margin-top: 4px;text-align: left" *ngIf="f.newprix > 0"><span class="text-primary "> {{ f.newprix + ' ( special offer  )' }} </span></h4>
                                      </ul>
                                     <a  (click)="addToWishList(f._id)"  style="margin-top: -10px;" class="btn btn-opacity-primary iconbox iconbox-sm" data-container="body" data-toggle="tooltip"

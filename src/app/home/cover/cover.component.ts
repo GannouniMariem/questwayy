@@ -42,16 +42,17 @@ export class CoverComponent implements OnInit {
 
   constructor( private _categorie: CategorieService, public endpoint: EndpointService ) { }
 
-  categories: any;
+  categorie: any;
 
   ngOnInit(): void {
 
-    this._categorie.getAllCategorie().subscribe(
+    this._categorie.getCta1().subscribe(
       res=>{
-        this.categories = res;
+        this.categorie = res;
+        
       }
     );
-
+   
   }
 
 }

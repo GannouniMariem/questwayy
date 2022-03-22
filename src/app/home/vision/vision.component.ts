@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategorieService } from 'src/app/services/categorie.service';
 
 @Component({
   selector: 'app-vision',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisionComponent implements OnInit {
 
-  constructor() { }
+  constructor( private _categorie: CategorieService ) { }
+
+  categorie: any;
 
   ngOnInit(): void {
-  }
 
+    this._categorie.getCta3().subscribe(
+      res=>{
+        this.categorie = res;
+        
+      }
+    );
+   
+  }
 }

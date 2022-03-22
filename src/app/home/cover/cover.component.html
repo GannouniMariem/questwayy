@@ -1,23 +1,32 @@
 
 <header>
-  <img src="assets/images/header.svg"  id="header-img">
-  <div id="header-desc">
-      <div class="header-info">
-          <p class="top-title">learn a new skill online, on your time</p>
-          <h1 class="title">LEARNING  <br> is a CONSISTENT Process </h1>
-          <p class="description">a set of various courses online where you can leanr about anything you need</p>
-         
-          <button class="button">Start now</button>
-          <div class="header-icons">
-              
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-linkedin-in"></i>
-            <i class="fab fa-instagram"></i>
-          </div>
-      </div>
-      <div>
-        <img id="header-video" src="assets/images/pexels-michelangelo-buonarroti-8728380.jpg" alt="">
-      </div>
+  
+  <div class="container-fluid bg-danger">
+    <div class="ml-1">
+      <div id="header-desc" class="row px-3">
+        <div class="header-info col-lg-5 col-md-12 col-sm-12 col-12 d-flex align-items-center  justify-content-center py-5">
+            <div class="w-100">
+                <h1 class="top-title w-100 ">REACH THE <br> BEST VERSION OF YOURSELF</h1>
+                <p class="description">Embark on a lifelong journey of self-realization,
+                  spiritual, personal and professional growth through the help of our elite experts.</p>
+                  <a [href]="'/programs/' + categorie.name" >
+                    <button class="button">Start My Journey</button>
+                  </a>
+                
+                <div class="header-icons">
+                    
+                  <a href="https://www.facebook.com/Questwaycompany" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                  <a href="https://www.instagram.com/questwaycompany/" target="_blank"> <i class="fab fa-instagram"></i> </a>
+                  
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-12 col-sm-12 col-12 bg-dange d-flex justify-content-center p-0">
+          <video id="header-video" src="assets/video/vid.mp4" controls></video>
+        </div>
+    </div>
+    </div>
   </div>
- 
+
 </header>
+

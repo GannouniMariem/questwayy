@@ -15,6 +15,7 @@ import { FaqComponent } from './faq/faq.component';
 import { HowitworkComponent } from './howitwork/howitwork.component';
 import { QuoteComponent } from './quote/quote.component';
 import { VisionComponent } from './vision/vision.component';
+import { TemoignageComponent } from './temoignage/temoignage.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { VisionComponent } from './vision/vision.component';
     FaqComponent,
     HowitworkComponent,
     QuoteComponent,
-    VisionComponent
+    VisionComponent,
+    TemoignageComponent
   ],
   imports: [
  

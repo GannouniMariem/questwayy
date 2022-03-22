@@ -1,1 +1,65 @@
-<p>faq works!</p>
+<section class="faq">
+    <div class=" mb-5">
+        <h2 class="mb-5 faq-title">FAQs</h2>
+      </div>
+
+      <div class="container py-5">
+          <div class="row collapses">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-12 d-flex align-items-end ">
+                  <div>
+                      <div class="accordion active" id="accordionExample">
+                        <div class="faq-card">
+                          <div class="faq-card-header" id="headingOne">
+                            <h2 class="my-2">
+                              <button class="btn btn-link btn-block text-left accordion-btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                How can I pay for a program?
+                              </button>
+                            </h2>
+                          </div>
+                      
+                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="faq-card-body">
+                              QuestWay supports several different payment methods from all around the world. Indeed, 
+                              you can pay online using your credit/debit card or your E-dinar card, or you can pay offline through 
+                              a bank transfer. If you choose the offline method, you’ll have to contact us at <a href="#" style="font-weight: 700;">Contact@questwaycompany</a> .
+                              com so we can provide you with the needed details. These payment methods apply to all digital products on QuestWay.                            </div>
+                          </div>
+                        </div>
+                        <div class="faq-card">
+                          <div class="faq-card-header" id="headingTwo">
+                            <h2 class="my-2">
+                              <button class="btn btn-link btn-block text-left collapsed accordion-btn" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                What do QuestWay Programs include?
+                              </button>
+                            </h2>
+                          </div>
+                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="faq-card-body">
+                              The foundation of each QuestWay program are its lectures, which can include videos, slides, text, PDFs, templates, checklists, etc. In addition, instructors can provide live classes through Zoom to interact with the students and answer all of their questions. They can also add resources and various types of practice activities, as a way to enhance the learning experience and make it more practical. In fact, every program here on QuesWay is unique and full of value thanks to our creative instructors.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="faq-card">
+                          <div class="faq-card-header" id="headingThree">
+                            <h2 class="my-2">
+                              <button class="btn btn-link btn-block text-left accordion-btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                How do I access a QuestWay program?
+                              </button>
+                            </h2>
+                          </div>
+                          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="faq-card-body">
+                              QuestWay programs can be accessed from several different devices and platforms, including a desktop, laptop, tablet, and phone. In order to learn about a program, all you have to do is check its page for all the information you need. You’ll be informed about its lectures, registration periods, live classes timing, communication methods with the instructor, etc. After you enroll in a program, you can access it by clicking on the course link you will receive in your confirmation email.                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <a [href]="'/programs/' + categorie.name" class="faq-button btn">Get started now</a>
+
+                  </div>
+              </div>
+              <div class="col-lg-6 col-md-6 mt-5 col-sm-12 col-12 text-center mx-auto ">
+                  <img class="img mx-auto" style="margin-left: 100px !important" src="assets/images/FAQS.gif" alt="" >
+              </div>
+          </div>
+      </div>
+</section>

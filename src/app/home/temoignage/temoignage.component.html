@@ -1,0 +1,87 @@
+<section class=" padding-y-100  work-section ">
+    <div class=" mb-5">
+        <h2 class="mb-5 work-title">Testimonials</h2>
+    </div>
+
+
+    <div class="container-fluid pl-0">
+
+        <div *ngIf="screenWidth <= 700" class="col-12">
+            <owl-carousel-o  [options]="customOptions" class="arrow-on-hover" data-space="30" data-arrow="true">
+                <ng-container *ngFor="let slide of temoinages;let i = index">
+                    <ng-template carouselSlide [id]="slide._id" >
+                        <div  style="display: flex; width: 100%;height: 100% ;justify-content: center;align-items: center;"
+                            class="ng-star-inserted">
+                            <div  style="width: 100%;height: 500px;" class="bg-left item">
+                                <div  class="info"><img  alt=""
+                                        class="iconbox iconbox-xxl"
+                                        [src]="'https://api.questwaycompany.com/getfile/' + temoinages[i].image">
+                                    <h2  class="font-primary name">{{ temoinages[i].nom }}</h2>
+                                    <p 
+                                        style="margin-left: auto; margin-right: 70px; font-size: 18px; margin-top: -40px;">
+                                        {{temoinages[i].date | date}} 
+                                    
+                              
+                                    
+                                    </p>
+                                </div>
+                                <p  class="lead mt-4 avis"> {{ temoinages[i].description }} .</p>
+                                <p  class="lead text-right mt-4 fn"
+                                    style="margin-right: 80px; font-weight: 600;"> {{ temoinages[i].fonction }} </p>
+                            </div>
+                      
+                        </div>
+
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+
+
+        <div *ngIf="screenWidth > 700" class="col-12">
+            <owl-carousel-o  [options]="customOptions" class="arrow-on-hover" data-space="30" data-arrow="true">
+                <ng-container *ngFor="let slide of temoinages;let i = index">
+                    <ng-template carouselSlide [id]="slide._id" *ngIf="i < temoinages.length/2">
+                        <div  style="display: flex; width: 100%;height: 100% ;justify-content: center;align-items: center;"
+                            class="ng-star-inserted">
+                            <div  style="width: 100%;height: 500px;" class="bg-left item">
+                                <div  class="info"><img  alt=""
+                                        class="iconbox iconbox-xxl"
+                                        [src]="'https://api.questwaycompany.com/getfile/' + temoinages[i].image">
+                                    <h2  class="font-primary name">{{ temoinages[i].nom }}</h2>
+                                    <p 
+                                        style="margin-left: auto; margin-right: 70px; font-size: 18px; margin-top: -40px;">
+                                        {{temoinages[i].date | date}} 
+                                    
+                              
+                                    
+                                    </p>
+                                </div>
+                                <p  class="lead mt-4 avis"> {{ temoinages[i].description }} .</p>
+                                <p  class="lead text-right mt-4 fn"
+                                    style="margin-right: 80px; font-weight: 600;"> {{ temoinages[i].fonction }} </p>
+                            </div>
+                            <div  style="width: 100%;height: 500px;" class="bg-right item">
+                                <div  class="info"><img  alt=""
+                                        class="iconbox iconbox-xxl"
+                                        [src]="'https://api.questwaycompany.com/getfile/' + temoinages[i*2 + 1].image">
+                                    <h2  class="font-primary name">{{temoinages[i*2 + 1].nom}}</h2>
+                                    <p 
+                                        style="margin-left: auto; margin-right: 70px; font-size: 18px; margin-top: -30px;">
+                                        {{temoinages[i*2 + 1].date | date}}
+                                  
+                                    
+                                    </p>
+                                </div>
+                                <p  class="lead mt-4 avis"> {{temoinages[i*2 +1].description}} .</p>
+                                <p  class="lead text-right mt-4 fn"
+                                    style="margin-right: 80px; font-weight: 600;"> {{temoinages[i*2 +1].fonction}} </p>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>

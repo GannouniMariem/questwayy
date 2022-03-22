@@ -4,14 +4,40 @@
 
 
 
+<!-- 
 
-<app-about [id]="id"></app-about>
-
-<app-mycourses [id]="id"></app-mycourses>
-
+ -->
 
 
+ <section class="paddingTop-50 paddingBottom-100 bg-light">
 
+    <div class="container " style="margin-top: 100px;">
+      <nav aria-label="breadcrumb"  >
+        <ol class="breadcrumb" style="background-color: transparent;">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    
+          <li class="breadcrumb-item active" aria-current="page">profile</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mt-4">
+                 <app-about [id]="id"></app-about>
+
+            </div><!-- END col-md-4 -->
+            
+                        
+
+            <div class="col-lg-8">
+                <app-mycourses [id]="id"></app-mycourses>
+               
+            </div><!-- END col-md-8 -->
+        </div>
+        <!--END row-->
+    </div>
+    <!--END container-->
+    </section>
 
 
 

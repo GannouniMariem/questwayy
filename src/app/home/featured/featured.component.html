@@ -1,10 +1,11 @@
-<section class="padding-y-100" style="background: #3b3e79">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center text-white mb-5">
-          <h2 class="mb-4">Featured Courses</h2>
-          <div class="width-3rem height-4 rounded bg-primary mx-auto"></div>
-        </div>
+<section class="padding-y-100 my-0 featured-section " >
+
+    <div class=" mt-5">
+        <h2 class="mb-5 featured-title">Our Most <br> Popular Programs</h2>
+      </div>
+      <div style="height: 30px;"></div>
+    <div class="container mt-5">
+      <div class="row ">
         <div class="col-12">
           <owl-carousel-o  [options]="customOptions" class="arrow-on-hover" data-space="30" data-arrow="true">
             <ng-container *ngFor="let slide of formations">
@@ -15,32 +16,25 @@
                         <div
                         class="position-absolute d-flex align-items-center justify-content-between width-100p top-0 padding-15">
                         <span class="badge badge-primary mr-3">Featured</span>
-                        <div class="group">
-                            <a (click)="addToWishList(slide._id)" class="iconbox iconbox-sm ml-1 bg-white-0_8 hover:bg-primary">
-                                <i *ngIf="_wish.wishlist.indexOf(slide._id) == -1 "  class="far fa-heart"></i>
-                                <i *ngIf="_wish.wishlist.indexOf(slide._id) >= 0 "  class="fas fa-heart active "></i>
-
-                            
-                            </a>
-                        </div>
+               
                         </div>
                     </div>
-                    <div class="card-body"><a [routerLink]="['/detail' , slide._id]" class="h6"> {{slide.titre}} </a>
+                    <div class="card-body" ><a [routerLink]="['/detail' , slide.titre, slide._id]" class="h6"> {{slide.titre}} </a>
                         <p class="my-3"><i class="ti-user mr-2"></i> {{slide.formatteur}}  </p>
-                        <p class="mb-0"><i class="fas fa-star text-warning"></i> <i class="fas fa-star text-warning"></i> <i
-                            class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i> <i class="fas fa-star text-warning"></i>
-                        <span class="text-dark">5</span> <span>(4578)</span></p>
+                   
                     </div>
-                    <div class="media border-top p-4 align-items-center justify-content-between" style="margin-top: -16px;height: 100px;">
-                        <ul class="list-unstyled mb-0" style="margin-top: -16px;">
-                        <li class="mb-1" *ngIf="slide.lectures"><i class="ti-headphone small mr-2"></i> {{slide.lectures}} lectures</li>
-                        <li class="mb-1" *ngIf="slide.heures"><i class="ti-time small mr-2"></i> {{ slide.heures }} hours</li>
-                        </ul>
-                        <ul class="list-unstyled mb-0">
-                            <h4 class="h5" *ngIf="slide.newprix >= 0"><span class="text-primary"> {{ slide.newprix }} </span></h4>
-                            <h4 class="h5" style="margin-top: -12px;"  [ngClass]="{'deleted':  slide.newprix >= 0}" ><span class="text-primary"> {{ slide.prix }} </span></h4>
-                        </ul>
+                    <div class="media border-top p-3 align-items-center justify-content-between" style="height: 90px;margin-top: -24px;"  >
+                        <ul  style="height: 20px;margin-top: -10px;" [ngClass]="{'top':  slide.newprix > 0 , 'list-unstyled': true, 'mb-0': true }" >
+                            <h2 class="h5" style=" margin-bottom: -8px;text-align: left" *ngIf="slide.prix == 0"  ><span class="text-primary"> FREE</span></h2>
+
+                            <h2 class="h5" style="text-align: left;margin-top: -14px;" *ngIf="slide.prix > 0" [ngClass]="{'deleted':  slide.newprix > 0}" ><span [ngClass]="{'text-primary' : slide.newprix == 0 }"> {{ slide.prix }} TND</span></h2>
+                            <h2 class="h5" style="margin-top: -18px;text-align: left" *ngIf="slide.newprix > 0"><span class="text-primary "> {{ slide.newprix + ' ( special offer  )' }} </span></h2>
+                         </ul>
+                        <a  (click)="addToWishList(slide._id)"  style="margin-top: -10px;" class="btn btn-opacity-primary iconbox iconbox-sm" data-container="body" data-toggle="tooltip"
+                        data-placement="top" data-skin="light" title="Add to wishlist">
+                        <i *ngIf="_wish.wishlist.indexOf(slide._id) == -1 "  class="far fa-heart"></i>
+                        <i *ngIf="_wish.wishlist.indexOf(slide._id) >= 0 "  class="fas fa-heart active "></i>
+                    </a>
                     </div>
                     </div>
                 </ng-template>
@@ -49,6 +43,12 @@
         </div>
       
       </div>
+
+      <!-- featured Btn -->
+      <a [href]="'/programs/' + categorie.name" >
+      <button class="featured-btn btn">Browse All Programs</button>
+
+      </a>
     </div><!-- END container-->
   </section>
   <!-- END section-->

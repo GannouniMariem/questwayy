@@ -31,7 +31,7 @@
     <div class="row">
         
         <div class="col-12" *ngIf="forma.formations.length>2 ">
-            <h1>kdjl</h1>
+
             <owl-carousel-o  [options]="customOptions" class="arrow-on-hover" data-space="30" data-arrow="true">
                 <ng-container *ngFor="let f of forma.formations">
                     <ng-template carouselSlide [id]="f._id">
@@ -63,7 +63,7 @@
             
           </div>
           <div class="col-12" *ngIf="forma.formations.length>1 && forma.formations.length<3 && screenWidth < 700 ">
-            <h1>kdjl</h1>
+      
             <owl-carousel-o  [options]="customOptions" class="arrow-on-hover" data-space="30" data-arrow="true">
                 <ng-container *ngFor="let f of forma.formations">
                     <ng-template carouselSlide [id]="f._id">

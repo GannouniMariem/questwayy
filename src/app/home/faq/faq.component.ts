@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategorieService } from 'src/app/services/categorie.service';
 
 @Component({
   selector: 'app-faq',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqComponent implements OnInit {
 
-  constructor() { }
+  constructor( private _categorie: CategorieService ) { }
+
+  categorie: any;
 
   ngOnInit(): void {
-  }
 
+    this._categorie.getCta4().subscribe(
+      res=>{
+        this.categorie = res;
+        
+      }
+    );
+   
+  }
 }

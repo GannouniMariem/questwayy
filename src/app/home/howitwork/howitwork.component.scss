@@ -1,0 +1,86 @@
+.work-section{
+    width: 100%;
+    background-image: url(/assets/images/howitwork.png);
+    background-position: 50% 0;
+    background-size: cover;
+    height:max-content;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-top: -130px;
+}
+
+.work-title{
+    line-height: 45px;
+    font-family: poppins;
+    font-size: 52px;
+    float: right;
+    font-weight: 700!important;
+    color: #292929;
+    margin: 15px 0;
+  
+    position: absolute;
+    top:0;
+    right:50px;
+    z-index: 999;
+}
+
+
+.work-title::before{
+    content:'';
+    width: 120% !important;
+    height: 28px !important;
+    background-color: #eb7720 !important;
+    position: absolute;
+    right:-50px;
+    bottom:-8px;
+    z-index: -1;
+}
+
+.section-title{
+    text-align: center;
+    top: 25%;
+    color: #2c2b2b;
+    font-size: 50px;
+    line-height: 70px;
+}
+
+.info-bloc{
+    transform: translateY(0%);
+}
+
+#arrow{
+    display: none;
+    visibility: none;
+}
+
+@media (min-width: 478px){
+    
+
+    
+}
+
+@media (min-width: 786px){
+    .info-bloc{
+        transform: translateY(-50%);
+    }
+}
+
+@media (min-width: 1024px){
+    .info-bloc{
+        transform: translateY(-50%);
+    }
+
+    #arrow{
+        transform: translateY(30%);
+        visibility: visible;
+        display: inline-block;
+    }  
+
+}
+
+@media (min-width: 1920px){}
+
+
+@media (min-width: 576px) { 
+    
+}

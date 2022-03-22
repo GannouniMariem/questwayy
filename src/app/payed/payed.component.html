@@ -1,6 +1,12 @@
-<div *ngIf="success"
+<div *ngIf="success && !free"
     style="height: 80vh; display: flex; justify-content: center; align-items: center; flex-direction: column;"><img
         src="assets/images/success.png" alt="" style="height: 40vh;">
+    <h2  class="text-success"> Check your mail ! </h2>
+</div>
+
+<div *ngIf="success && free"
+    style="height: 80vh; display: flex; justify-content: center; align-items: center; flex-direction: column;"><img
+        src="assets/images/successf.png" alt="" style="height: 40vh;">
     <h2  class="text-success"> Check your mail ! </h2>
 </div>
 

@@ -14,6 +14,7 @@ export class PayedComponent implements OnInit {
 
   orderId = '';
   success = true;
+  free = true;
   order : any;
   ngOnInit(): void {
     this.panier.viderPanier();
@@ -25,6 +26,11 @@ export class PayedComponent implements OnInit {
           this.order = res;
           if(this.order.access){
             this.success = true
+            if(this.order.prix == 0){
+              this.free = true;
+            }else{
+              this.free = false
+            }
           }else{
             this.success = false;
 

@@ -59,4 +59,34 @@ export class CategorieService {
   }
 
 
+  getCta1(){
+
+    return this.http.get(this.sous + 'cta1/'  );
+
+  }
+
+  getCta2(){
+
+    return this.http.get(this.sous + 'cta2/'  );
+
+  }
+
+  getCta3(){
+
+    return this.http.get(this.sous + 'cta3/'  );
+
+  }
+
+  getCta4(){
+
+    return this.http.get(this.sous + 'cta4/'  );
+
+  }
+
+
+
+
+
+
+
 }

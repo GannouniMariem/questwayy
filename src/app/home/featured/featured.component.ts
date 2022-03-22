@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AuthService } from 'src/app/services/auth.service';
+import { CategorieService } from 'src/app/services/categorie.service';
 import { EndpointService } from 'src/app/services/endpoint.service';
 import { FormationService } from 'src/app/services/formation.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
@@ -44,7 +45,9 @@ export class FeaturedComponent implements OnInit {
 
   formations: any;
 
-  constructor(private _formation: FormationService,public endpoint: EndpointService, public _wish: WishlistService, private _auth: AuthService) { }
+  constructor(private _formation: FormationService,public endpoint: EndpointService, public _wish: WishlistService, private _auth: AuthService, private _categorie: CategorieService) { }
+
+  categorie: any;
 
   ngOnInit(): void {
 
@@ -52,6 +55,12 @@ export class FeaturedComponent implements OnInit {
       res=>{
         this.formations = res;
        
+      }
+    );
+
+    this._categorie.getCta2().subscribe(
+      res=>{
+        this.categorie = res;
       }
     );
 
