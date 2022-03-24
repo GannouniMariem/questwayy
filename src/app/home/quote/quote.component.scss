@@ -4,12 +4,17 @@
     background-image: url(/assets/images/quote.png);
     background-position: 100% 100%;
     background-size: cover;
-    height: 850px;
+    height: 800px;
     background-repeat: no-repeat;
     margin-top: -48px;
 
 }
 
+@media (min-width: 350px){
+    .quote{
+         height: 850px;
+    }
+}
 
 @media (min-width: 478px){
     .quote{

@@ -5,7 +5,6 @@ h2{
 }
 
 .featured-section{
-  margin-top: 80px !important;
   width: 100%;
   height: max-content;
   background-image: url(/assets/images/featured.png);
@@ -109,15 +108,27 @@ h2{
 }
 
 @media (min-width: 1024px){
-    
+  
+  .featured-section{
+    height:max-content !important;
+  }
+  .featured-title-block{
+    margin-bottom: 120px !important;
+  }
 }
 
-@media (min-width: 1920px){}
+@media (min-width: 1920px){
 
+  .featured-section{
+    height:max-content !important;
+    background-position: 100% 95%;
 
+  }
 
-
-@media (min-width: 576px) { 
-  
+  .featured-title{
+    font-size: 90px;
+    line-height: 90px;
+    top: -100px;
+  }
 }
 

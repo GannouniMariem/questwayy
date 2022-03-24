@@ -1,13 +1,16 @@
 .faq{
     width: 100%;
-    height: max-content;
+    max-height:fit-content;
     background-image: url(/assets/images/faq.png);
     background-position: 100% 100%;
     background-size: 100% 100%;
-    height: 105vh;
+    height: 250vh;
     background-repeat: no-repeat;
     position: relative;
-    margin-top: -44px;
+}
+
+.collapses{
+    transform: translateY(10%);
 }
 
 .faq-title{
@@ -83,24 +86,79 @@
 }
 
 
+@media (max-width: 320px){
+    .accordion-btn{
+        width: 100%;
+        font-size: 20px;
+        line-height: 30px;
+    } 
+  }
+  
+  @media (min-width: 360px){
+    
+    .faq{
+        height: 200vh;
+    }
+    .accordion-btn{
+        width: 100% !important;
+        font-size: 25px;
+        line-height: 30px;
+    } 
+  }
+  
+  
+  @media (min-width: 375px){
+    
+  }
+  
+  @media (min-width: 400px){
+    
+  }
+  
+
 @media (min-width: 478px){
   
 }
 
 @media (min-width: 786px){
+    .faq{
+        height: 105vh;
+    }
   .accordion-btn{
     font-size: 16px;
     height: 60px;
     width: 600px;
     font-size: 20px;
     line-height: 48px;
-    
 }
   
 }
 
-@media (min-width: 1024px){
+@media (min-width: 1024px){}
+
+@media (min-width: 1920px){
+    .collapses{
+        width: 100% !important;
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+    }
+    .faq-title{
+        font-size: 90px;
+        line-height: 90px;
+    }
+
+    .accordion-btn{
+        font-size: 50px;
+        line-height: 50px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .faq-card-body{
+        font-size: 30px !important;
+        line-height: 48px;
+
+        
+    }
 
 }
-
-@media (min-width: 1920px){}

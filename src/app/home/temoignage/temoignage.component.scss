@@ -17,11 +17,9 @@
     float: right;
     font-weight: 700!important;
     color: #292929;
-    margin: 15px 0;
-  
+    margin: 15px 0; 
     position: absolute;
     top:5;
-    right:50px;
     z-index: 999;
 }
 
@@ -37,32 +35,19 @@
     z-index: -1;
 }
 
-.section-title{
-    text-align: center;
-    top: 25%;
-    color: #2c2b2b;
-    font-size: 50px;
-    line-height: 70px;
-}
-
-.info-bloc{
-    transform: translateY(0%);
-}
-
-#arrow{
-    display: none;
-    visibility: none;
-}
 
 .bg-left {
     background-image: url(/assets/images/slide_left.png);
-    float: right;
+    float:right;
+    background-size: cover;
+    background-size : 100%; 
+
 }
 
 .bg-right {
     box-sizing : border-box; 
-    height : 450px; 
-    width : 683.55px; 
+    height : max-content !important;
+    width: 100% !important;  
     background-repeat : no-repeat; 
     background-size : 100%; 
     background-image : url("/assets/images/slide_right.png"); 
@@ -73,7 +58,7 @@
 
 .info{
     box-sizing : border-box; 
-    margin : 100px 0px 12px 80px; 
+    margin : 0; 
     display : flex; 
     align-items : center; 
 
@@ -158,34 +143,66 @@
     background-size: 100%;
 }
 
-@media (min-width: 478px){
-    
+.item{
+    width: 100%!important;
+    height: 450px;
+}
 
-    
+@media (min-width: 478px){
+    .item{
+        margin-top: 24px;
+        height: 320px!important;
+        background-size: 100% 100%!important;
+    }   
 }
 
 @media (min-width: 786px){
-    .info-bloc{
-        transform: translateY(-50%);
+    .info{
+        margin : 100px 0px 12px 80px; 
     }
 }
 
 @media (min-width: 1024px){
-    .info-bloc{
-        transform: translateY(-50%);
-    }
-
-    #arrow{
-        transform: translateY(30%);
-        visibility: visible;
-        display: inline-block;
-    }  
-
+    .bg-right {
+        box-sizing : border-box; 
+        height : 450px; 
+        width : 683.55px; 
+    }    
 }
 
-@media (min-width: 1920px){}
+@media (min-width: 1920px){
+    
+    .work-title{
+        font-size: 90px;
+        line-height: 90px;
+    }
 
-
-@media (min-width: 576px) { 
+    
+    .bg-right {
+        background-repeat : no-repeat;
+        background-size : 100%; 
+        background-image : url("/assets/images/slide_right.png"); 
+        float : left; 
+        padding: 24px;
+    
+    }
+    
+    .iconbox{
+        width : 100px; 
+        height : 100px; 
+    }
+    
+    
+    .name{
+        font-size : 30px; 
+    }
+    
+    .info>p{
+        margin : -40px 70px 12px 271.525px; 
+        box-sizing : border-box; 
+        margin-top : -40px; 
+        margin-bottom : 12px; 
+    }
+    
     
 }
